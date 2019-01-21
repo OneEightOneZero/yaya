@@ -1,0 +1,307 @@
+<template>
+<body class="yaya">
+  <div class="page-starter" style="display: none;">
+    <img
+      width="90"
+      height="40"
+      class="logo"
+      src="data:image/png;base64,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"
+    >
+  </div>
+  <div class="app-wrap">
+    <!---->
+    <div class="wrapper">
+      <div class="flex-child-noshrink light-bg">
+        <!---->
+        <header class="header">
+          <div class="wrapper">
+            <!---->
+            <div
+              class="main flex flex-justify-between relative bb"
+              style="background-color: rgba(250, 250, 250, 0.98);"
+            >
+              <div class="left-side">
+                <a
+                  href="javascript:;"
+                  class="back-button flex flex-center"
+                  style="color: rgb(51, 51, 51); padding-left: 0px;"
+                >
+                  <i class="fa fa-angle-left font-30"></i>
+                  <span class="back-text font-16"></span>
+                </a>
+              </div>
+              <div class="title flex flex-center" style="left: 44px; right: 44px;">
+                <h1 class="lines-1 font-17 normal" style="color: rgb(51, 51, 51);">登录</h1>
+              </div>
+              <div class="right-side flex flex-center">
+                <a
+                  href="javascript:;"
+                  class="menu-btn flex flex-center grey-6"
+                  style="color: rgb(51, 51, 51);"
+                >
+                  <i class="fa fa-ellipsis-h font-24"></i>
+                </a>
+              </div>
+            </div>
+            <div class="menu-box flex" style="height: 0px;">
+              <a href="/" class="flex flex-col flex-center router-link-active">
+                <i class="fa fa-home"></i>
+                <span>首页</span>
+              </a>
+              <a href="/category" class="flex flex-col flex-center">
+                <i class="fa fa-reorder"></i>
+                <span>分类</span>
+              </a>
+              <a href="/trade/cart" class="flex flex-col flex-center">
+                <i class="fa fa-shopping-cart"></i>
+                <span>购物车</span>
+              </a>
+              <a href="/member" class="flex flex-col flex-center">
+                <i class="fa fa-user"></i>
+                <span>我的</span>
+              </a>
+            </div>
+          </div>
+        </header>
+      </div>
+      <div class="login-tab flex flex-center">
+        <div class="main-color">账号密码登录</div>
+        <div style="margin: 0px 20px;">|</div>
+        <div class>短信验证码登录</div>
+      </div>
+      <div class="login">
+        <div class="login-item border-bottom flex flex-align-center">
+          <div class="item-icon">
+            <i class="fa fa-user-o font-18 grey-6"></i>
+          </div>
+          <input type="text" placeholder="用户名/手机号" class="login-input flex-child-grow">
+          <!---->
+        </div>
+        <div class="login-item border-bottom flex flex-align-center">
+          <div class="item-icon">
+            <i class="fa fa-unlock-alt font-20 grey-6"></i>
+          </div>
+          <input type="password" placeholder="请输入密码" class="login-input flex-child-grow">
+          <!---->
+          <!---->
+        </div>
+        <div class="login-item border-bottom flex flex-align-center flex-justify-between">
+          <span class="grey-6">三个月内免登录</span>
+          <label class="mint-switch switch">
+            <input type="checkbox" class="mint-switch-input">
+            <span class="mint-switch-core"></span>
+            <div class="mint-switch-label"></div>
+          </label>
+        </div>
+      </div>
+      <a
+        href="javascript:;"
+        class="login-button flex flex-center grey-d-bg"
+        style="margin-top: 40px;"
+      >
+        <span class="font-16 white">登 录</span>
+      </a>
+      <div class="flex flex-justify-between" style="margin: 20px;">
+        <a href="/account/register?redirect=%2Fmessage" class>新用户注册</a>
+        <a href="/account/findpwd" class>忘记密码</a>
+      </div>
+      <!---->
+      <!---->
+      <!---->
+    </div>
+  </div>
+
+  <div
+    data-v-c213bd7c
+    class="progress"
+    style="width: 0%; height: 2px; background-color: rgb(26, 173, 25); opacity: 0;"
+  ></div>
+</body>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style scoped>
+.header {
+  position: relative;
+}
+.header.fixed {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 8;
+}
+.main {
+  height: 44px;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+}
+.main.bb:after {
+  content: "";
+  position: absolute;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #ccc;
+}
+.left-side {
+  height: 44px;
+}
+.back-button {
+  height: 44px;
+  min-width: 44px;
+  box-sizing: border-box;
+}
+.back-text {
+  margin-left: 5px;
+}
+.title {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.right-side {
+  height: 44px;
+}
+.menu-btn {
+  width: 44px;
+  height: 44px;
+}
+.menu-box {
+  height: 60px;
+  background: #000;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+.menu-box a i {
+  font-size: 24px;
+  color: #9c9c9c;
+}
+.menu-box a {
+  width: 25%;
+  font-size: 12px;
+  color: #9c9c9c;
+}
+.login-tab {
+  margin: 30px 10px;
+}
+.login {
+  margin: 10px 20px;
+}
+.login-item {
+  height: 45px;
+}
+.item-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  text-align: center;
+}
+.item-close {
+  font-size: 28px;
+  color: #999;
+}
+.login-input {
+  height: 43px;
+  border: 0;
+  outline: none;
+}
+.login-small-input {
+  width: 180px;
+}
+.login-button {
+  height: 45px;
+  border-radius: 2px;
+  margin: 20px;
+}
+.get-pwd-btn {
+  padding: 7px;
+  border-radius: 4px;
+  border: 1px solid #78b;
+  color: #78b;
+  font-size: 12px;
+}
+.disableText {
+  border: 1px solid #dfdfdf;
+  color: #999;
+}
+.verify-img {
+  width: 90px;
+  height: 30px;
+}
+.third-img {
+  width: 34px;
+  height: 34px;
+}
+.app-jumping {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+}
+.pop-verify {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.pop-verify-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 200px;
+  background: #fff;
+  border-radius: 5px;
+}
+.pop-verify-box input {
+  width: 160px;
+  height: 40px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+.pop-verify-btns a {
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  width: 50%;
+  display: block;
+}
+.security .icon {
+  width: 125px;
+  height: 125px;
+  margin: 30px 0;
+}
+.security .input-box,
+.security p {
+  width: 8.5rem;
+  margin: 10px 0;
+}
+.security .input-box input {
+  width: 100%;
+  height: 36px;
+  border-radius: 36px;
+  background: #f5f5f5;
+  border: 0;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+.security .input-box .login-button {
+  width: 100%;
+  margin: 0;
+}
+</style>
