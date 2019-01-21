@@ -8,10 +8,10 @@
             <i class="fa fa-angle-down font-16 ml-5"></i>
           </a>
           <div class="line"></div>
-          <a href="/search-form" class="search-btn flex flex-align-center flex-child-grow">
+          <router-link to="/search" href="javascript:;" class="search-btn flex flex-align-center flex-child-grow">
             <i class="fa fa-search mr-5 white"></i>
             <span class="lines-1">iPhone XS Max</span>
-          </a>
+          </router-link>
         </div>
       </div>
       <div class="tabs relative flex flex-justify-between wrapper">

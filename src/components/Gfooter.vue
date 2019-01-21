@@ -1,17 +1,18 @@
 <template>
   <div class="tab-bar-box">
     <div class="tab-bar wrapper flex flex-align-center border-top">
-      <a
-        @click="tab(index)"
+      <router-link
+        :to="f.rout"
+        @click.native="tab(index)"
         v-for="(f,index) in footerText"
         :key="index"
-        href="javascript:;"
+        
         class="tab-bar-item flex flex-col flex-center relative"
         :class="{'font-color':page == index}"
       >
         <img :src="page == index?f.imgurl2:f.imgurl" class="img-text">
         <span class="text font-10 block" v-text="f.text"></span>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
@@ -33,26 +34,31 @@ export default {
         {
           text: "首页",
           imgurl: home,
-          imgurl2: home2
+          imgurl2: home2,
+          rout:"/app/yaya"
         },
         {
           text: "分类",
           imgurl: fenlei,
-          imgurl2: fenlei2
+          imgurl2: fenlei2,
+          rout:"/app/fenlei"
         },
         {
           text: "消息",
-          imgurl: news
+          imgurl: news,
+          rout:"/app/yaya"
         },
         {
           text: "购物车",
           imgurl: cart,
-          imgurl2: cart2
+          imgurl2: cart2,
+          rout:"/app/cart"
         },
         {
           text: "我的",
           imgurl: mine,
-          imgurl2: mine2
+          imgurl2: mine2,
+          rout:"/app/mine"
         }
       ],
       page:0

@@ -1,67 +1,10 @@
 <template>
-  <div
-    
-    
-   
-
-    class="floor"
-  >
+  <div class="floor">
     <!---->
-    <div
-      
-      
-      class="floor-picture flex flex-justify-between"
-      
-    >
-      <a  href="https://m.yaya.cn/bargain/" class="block style7">
+    <div class="floor-picture flex flex-justify-between">
+      <a v-for="(i,index) in img" :key="index" href="https://m.yaya.cn/bargain/" class="block style7">
         <img
-          
-          
-          src="https://img2.yaya.cn/newstatic/1378/b897e892a9721a.jpg.webp"
-          width
-          height
-          class="lazy-img"
-          loaded="true"
-        >
-      </a>
-      <a  href="https://m.yaya.cn/vip" class="block style7">
-        <img
-          
-          
-          src="https://img2.yaya.cn/newstatic/1383/b897e5517dc3e2.jpg.webp"
-          width
-          height
-          class="lazy-img"
-          loaded="true"
-        >
-      </a>
-      <a  href="https://m.yaya.cn/?tabs=4" class="block style7">
-        <img
-          
-          
-          src="https://img2.yaya.cn/newstatic/1381/b897eafa050e04.jpg.webp"
-          width
-          height
-          class="lazy-img"
-          loaded="true"
-        >
-      </a>
-      <a  href="https://m.yaya.cn/local" class="block style7">
-        <img
-          
-          
-          src="https://img2.yaya.cn/newstatic/1379/b897ec6b5249ac.jpg.webp"
-          width
-          height
-          class="lazy-img"
-          loaded="true"
-        >
-      </a>
-      <a  href="https://m.yaya.cn/member/more" class="block style7">
-        <img
-          
-          
-          src="https://img2.yaya.cn/newstatic/1378/b897ef64ab5dee.jpg.webp"
+          :src="i.imgurl"
           width
           height
           class="lazy-img"
@@ -69,13 +12,34 @@
         >
       </a>
     </div>
-
   </div>
 </template>
 
 <script>
+import youpin from "../assets/youpin.jpg";
+import julebu from "../assets/julebu.jpg";
+import zixun from "../assets/zixun.jpg";
+import mendian from "../assets/mendian.jpg";
+import faxian from "../assets/faxian.jpg";
 export default {
-  name:"Gnav"
+  name: "Gnav",
+  data(){
+    return{
+      img:[
+        {
+          imgurl:youpin
+        },{
+          imgurl:julebu
+        },{
+          imgurl:zixun
+        },{
+          imgurl:mendian
+        },{
+          imgurl:faxian
+        },
+      ]
+    }
+  }
 };
 </script>
 

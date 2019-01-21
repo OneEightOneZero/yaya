@@ -1,9 +1,5 @@
 <template>
   <div class="floor">
-    <!---->
-    <!---->
-    <!---->
-    <!---->
     <div>
       <div id="top-banner-1039463340404863158">
         <div class="mint-swipe banner banner-dot">
@@ -85,17 +81,7 @@
           </div>
         </div>
       </div>
-      <!---->
-      <!---->
     </div>
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
   </div>
 </template>
 

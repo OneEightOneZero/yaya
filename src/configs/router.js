@@ -9,6 +9,8 @@ import Fenlei from '../pages/Fenlei.vue'
 import News from '../pages/News.vue'
 import Cart from '../pages/Cart.vue'
 import Mine from '../pages/Mine.vue'
+import Search from '../pages/Search.vue'
+import Login from '../pages/Login.vue'
 
 const routes = [
     {
@@ -18,42 +20,48 @@ const routes = [
         children: [
             {
                 name: 'yaya',
-                path: '/yaya',
+                path: 'yaya',
                 component: Yaya,
             },
             {
                 name: 'fenlei',
-                path: '/fenlei',
+                path: 'fenlei',
                 component: Fenlei,
             },
             {
                 name: 'news',
-                path: '/news',
+                path: 'news',
                 component: News,
             },
             {
                 name: 'cart',
-                path: '/cart',
+                path: 'cart',
                 component: Cart,
             },
             {
                 name: 'mine',
-                path: '/mine',
+                path: 'mine',
                 component: Mine,
             }
         ]
     },
     {
-        path:'/',
-        redirect:{
-            name:"yaya"
+        name: "search",
+        path: "/search",
+        component: Search
+    }, 
+    {
+        name: 'login',
+        path: '/login',
+        component: Login
+    },
+    {
+        path: '/',
+        redirect: {
+            name: "yaya"
         }
     }
-    //  {
-    //     name:'login',
-    //     path:'/login',
-    //     component:Login
-    //  }
+
 ]
 
 const router = new vueRouter({
