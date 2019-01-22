@@ -8,7 +8,6 @@
 <script>
 import Gfooter from "./components/Gfooter.vue"
 import "./assets/css/total.css"
-import "./assets/css/loginReg.css"
 
 export default {
   name: "app",

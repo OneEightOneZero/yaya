@@ -76,5 +76,5 @@ export default {
 };
 </script>
 
-<style>
+<style src="../assets/css/loginReg.css" scoped>
 </style>

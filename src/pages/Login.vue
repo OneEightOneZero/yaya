@@ -21,14 +21,15 @@
               style="background-color: rgba(250, 250, 250, 0.98);"
             >
               <div class="left-side">
-                <a
-                  href="/"
+                <router-link
+                  to="/app/mine"
+                  href="javascript:;"
                   class="back-button flex flex-center"
                   style="color: rgb(51, 51, 51); padding-left: 0px;"
                 >
                   <i class="fa fa-angle-left font-30"></i>
                   <span class="back-text font-16"></span>
-                </a>
+                </router-link>
               </div>
               <div class="title flex flex-center" style="left: 44px; right: 44px;">
                 <h1 class="lines-1 font-17 normal" style="color: rgb(51, 51, 51);">登录</h1>
@@ -84,5 +85,5 @@
 export default { };
 </script>
 
-<style scoped>
+<style src="../assets/css/loginReg.css" scoped>
 </style>
