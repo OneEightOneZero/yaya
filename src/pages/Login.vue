@@ -40,25 +40,38 @@
           <div class="item-icon">
             <i class="fa fa-user-o font-18 grey-6"></i>
           </div>
-          <input type="text" placeholder="用户名/手机号" class="login-input flex-child-grow">
+          <input
+            @click="hidden"
+            v-model="user"
+            type="text"
+            placeholder="用户名/手机号"
+            class="login-input flex-child-grow"
+          >
         </div>
         <div class="login-item border-bottom flex flex-align-center">
           <div class="item-icon">
             <i class="fa fa-unlock-alt font-20 grey-6"></i>
           </div>
-          <input type="password" placeholder="请输入密码" class="login-input flex-child-grow">
+          <input
+            v-model="password"
+            type="password"
+            placeholder="请输入密码"
+            class="login-input flex-child-grow"
+          >
         </div>
+        <div v-show="xianshi" class="red" v-text="details"></div>
       </div>
       <a
+        @click="login"
         href="javascript:;"
         class="login-button flex flex-center grey-d-bg"
+        :class="{'light-green-bg':(user.length>0&&password.length>0)}"
         style="margin-top: 40px;"
       >
         <span class="font-16 white">登 录</span>
       </a>
       <div class="flex flex-justify-between" style="margin: 20px;">
         <router-link to="/register" href="javascript:;" class>新用户注册</router-link>
-        <a href="/account/findpwd" class>忘记密码</a>
       </div>
     </div>
   </div>
@@ -72,7 +85,56 @@
 </template>
 
 <script>
-export default {};
+import { ServerUrl } from "../configs/ServerUrl.js";
+import qs from "qs";
+export default {
+  name: "Login",
+  data() {
+    return {
+      user: "",
+      password: "",
+      details: "",
+      xianshi: false
+    };
+  },
+  methods: {
+    login() {
+      if (this.user.trim().length > 0 && this.password.trim().length > 0) {
+        this.$axios
+          .post(
+            ServerUrl + "/users",
+            qs.stringify({
+              user: this.user,
+              password: this.password
+            }),
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              }
+            }
+          )
+          .then(str => {
+            if (str.data.data != 0) {
+              location.href = "/";
+            } else {
+              this.xianshi = true;
+              this.details = "请输入正确密码";
+              this.user = "";
+              this.password = "";
+            }
+          });
+      } else {
+        this.xianshi = true;
+        this.details = "账号或密码不能为空";
+        this.user = "";
+        this.password = "";
+      }
+    },
+    hidden() {
+      this.xianshi = false;
+    }
+  }
+};
 </script>
 
 <style src="../assets/css/loginReg.css" scoped>

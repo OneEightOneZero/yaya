@@ -57,14 +57,9 @@
             @click="register"
             href="javascript:;"
             class="login-button flex flex-center grey-d-bg"
-            :class="{'blue-bg':(user.length>0&&password.length>0)}"
+            :class="{'light-green-bg':(user.length>0&&password.length>0)}"
           >
-            <span
-              class="font-32"
-              :class="{
-              'white':!(user.length>0&&password.length>0)
-              }"
-            >注册</span>
+            <span class="font-32 white">注册</span>
           </a>
         </div>
       </div>
@@ -87,7 +82,7 @@ export default {
       user: "",
       password: "",
       show: false,
-      details:""
+      details: ""
     };
   },
   methods: {
@@ -107,18 +102,20 @@ export default {
                 }
               }
             )
-            .then(()=> {
-              location.href="/";
+            .then(() => {
+              location.href = "/#/login";
             });
         } else {
           this.show = true;
-          this.details="手机号有误";
+          this.details = "手机号有误";
           this.user = "";
           this.password = "";
         }
-      }else{
+      } else {
         this.show = true;
-        this.details="手机号或密码不能为空";
+        this.details = "手机号或密码不能为空";
+        this.user = "";
+        this.password = "";
       }
     },
     focus() {
