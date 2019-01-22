@@ -22,7 +22,7 @@
             >
               <div class="left-side">
                 <a
-                  href="javascript:;"
+                  href="/"
                   class="back-button flex flex-center"
                   style="color: rgb(51, 51, 51); padding-left: 0px;"
                 >
@@ -33,41 +33,9 @@
               <div class="title flex flex-center" style="left: 44px; right: 44px;">
                 <h1 class="lines-1 font-17 normal" style="color: rgb(51, 51, 51);">登录</h1>
               </div>
-              <div class="right-side flex flex-center">
-                <a
-                  href="javascript:;"
-                  class="menu-btn flex flex-center grey-6"
-                  style="color: rgb(51, 51, 51);"
-                >
-                  <i class="fa fa-ellipsis-h font-24"></i>
-                </a>
-              </div>
-            </div>
-            <div class="menu-box flex" style="height: 0px;">
-              <a href="/" class="flex flex-col flex-center router-link-active">
-                <i class="fa fa-home"></i>
-                <span>首页</span>
-              </a>
-              <a href="/category" class="flex flex-col flex-center">
-                <i class="fa fa-reorder"></i>
-                <span>分类</span>
-              </a>
-              <a href="/trade/cart" class="flex flex-col flex-center">
-                <i class="fa fa-shopping-cart"></i>
-                <span>购物车</span>
-              </a>
-              <a href="/member" class="flex flex-col flex-center">
-                <i class="fa fa-user"></i>
-                <span>我的</span>
-              </a>
             </div>
           </div>
         </header>
-      </div>
-      <div class="login-tab flex flex-center">
-        <div class="main-color">账号密码登录</div>
-        <div style="margin: 0px 20px;">|</div>
-        <div class>短信验证码登录</div>
       </div>
       <div class="login">
         <div class="login-item border-bottom flex flex-align-center">
@@ -84,14 +52,6 @@
           <input type="password" placeholder="请输入密码" class="login-input flex-child-grow">
           <!---->
           <!---->
-        </div>
-        <div class="login-item border-bottom flex flex-align-center flex-justify-between">
-          <span class="grey-6">三个月内免登录</span>
-          <label class="mint-switch switch">
-            <input type="checkbox" class="mint-switch-input">
-            <span class="mint-switch-core"></span>
-            <div class="mint-switch-label"></div>
-          </label>
         </div>
       </div>
       <a
@@ -120,188 +80,9 @@
 </template>
 
 <script>
-export default {};
+
+export default { };
 </script>
 
 <style scoped>
-.header {
-  position: relative;
-}
-.header.fixed {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  z-index: 8;
-}
-.main {
-  height: 44px;
-  background-repeat: no-repeat;
-  background-position: top;
-  background-size: cover;
-}
-.main.bb:after {
-  content: "";
-  position: absolute;
-  -webkit-transform: scaleY(0.5);
-  transform: scaleY(0.5);
-  -webkit-transform-origin: 0 0;
-  transform-origin: 0 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-bottom: 1px solid #ccc;
-}
-.left-side {
-  height: 44px;
-}
-.back-button {
-  height: 44px;
-  min-width: 44px;
-  box-sizing: border-box;
-}
-.back-text {
-  margin-left: 5px;
-}
-.title {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-}
-.right-side {
-  height: 44px;
-}
-.menu-btn {
-  width: 44px;
-  height: 44px;
-}
-.menu-box {
-  height: 60px;
-  background: #000;
-  transition: all 0.3s ease-in-out;
-  overflow: hidden;
-}
-.menu-box a i {
-  font-size: 24px;
-  color: #9c9c9c;
-}
-.menu-box a {
-  width: 25%;
-  font-size: 12px;
-  color: #9c9c9c;
-}
-.login-tab {
-  margin: 30px 10px;
-}
-.login {
-  margin: 10px 20px;
-}
-.login-item {
-  height: 45px;
-}
-.item-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  text-align: center;
-}
-.item-close {
-  font-size: 28px;
-  color: #999;
-}
-.login-input {
-  height: 43px;
-  border: 0;
-  outline: none;
-}
-.login-small-input {
-  width: 180px;
-}
-.login-button {
-  height: 45px;
-  border-radius: 2px;
-  margin: 20px;
-}
-.get-pwd-btn {
-  padding: 7px;
-  border-radius: 4px;
-  border: 1px solid #78b;
-  color: #78b;
-  font-size: 12px;
-}
-.disableText {
-  border: 1px solid #dfdfdf;
-  color: #999;
-}
-.verify-img {
-  width: 90px;
-  height: 30px;
-}
-.third-img {
-  width: 34px;
-  height: 34px;
-}
-.app-jumping {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: #fff;
-}
-.pop-verify {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
-.pop-verify-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: 280px;
-  height: 200px;
-  background: #fff;
-  border-radius: 5px;
-}
-.pop-verify-box input {
-  width: 160px;
-  height: 40px;
-  border: 1px solid #ccc;
-  text-align: center;
-}
-.pop-verify-btns a {
-  height: 45px;
-  line-height: 45px;
-  text-align: center;
-  width: 50%;
-  display: block;
-}
-.security .icon {
-  width: 125px;
-  height: 125px;
-  margin: 30px 0;
-}
-.security .input-box,
-.security p {
-  width: 8.5rem;
-  margin: 10px 0;
-}
-.security .input-box input {
-  width: 100%;
-  height: 36px;
-  border-radius: 36px;
-  background: #f5f5f5;
-  border: 0;
-  padding: 0 15px;
-  box-sizing: border-box;
-}
-.security .input-box .login-button {
-  width: 100%;
-  margin: 0;
-}
 </style>

@@ -5,11 +5,11 @@
         <div class="mint-swipe banner banner-dot">
           <div class="mint-swipe-items-wrap">
             <div
+              
               v-for="(i,index) in img"
-              :key="index"
-              class="mint-swipe-item"
+              :key="i.imgurl"
+              class="mint-swipe-item slide-fade-enter-active"
               :class="{'is-active':page==index}"
-
             >
               <a href="https://m.yaya.cn/product/73640.html?from=banner">
                 <img :src="i.imgurl" width height class="lazy-img" loaded="true">
@@ -161,6 +161,7 @@ export default {
   overflow: hidden;
   position: relative;
   height: 100%;
+ 
 }
 .mint-swipe-items-wrap > div {
   position: absolute;
@@ -168,7 +169,7 @@ export default {
   transform: translateX(-100%);
   width: 100%;
   height: 100%;
-  display: none;
+   transition: all 1s;
 }
 .banner {
   width: 100%;
@@ -176,6 +177,11 @@ export default {
   padding: 14px;
   box-sizing: border-box;
   background: linear-gradient(#e10f02, #e10f02 70%, #fff 0, #fff);
+}
+.mint-swipe-items-wrap > div.is-active {
+  display: block;
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 .mint-swipe-items-wrap > div.is-active {
   display: block;
@@ -201,5 +207,7 @@ export default {
 .mint-swipe-indicator.is-active {
   background: #fff;
 }
+
+/* style="{'transform':page==index?'none':' translate3d(-375px, 0px, 0px)'}" */
 </style>
 

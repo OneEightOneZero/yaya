@@ -11,6 +11,7 @@ import Cart from '../pages/Cart.vue'
 import Mine from '../pages/Mine.vue'
 import Search from '../pages/Search.vue'
 import Login from '../pages/Login.vue'
+import Register from '../pages/Register.vue'
 
 const routes = [
     {
@@ -54,6 +55,11 @@ const routes = [
         name: 'login',
         path: '/login',
         component: Login
+    },
+    {
+        name: 'register',
+        path: '/register',
+        component: Register
     },
     {
         path: '/',
