@@ -4,80 +4,25 @@
       <div id="top-banner-1039463340404863158">
         <div class="mint-swipe banner banner-dot">
           <div class="mint-swipe-items-wrap">
-            <div class="mint-swipe-item" style>
-              <a href="https://m.yaya.cn/event/2949.html?from=banner">
-                <img
-                  src="https://img2.yaya.cn/newstatic/1379/b93b30ab989bbe.jpg.webp"
-                  width
-                  height
-                  class="lazy-img"
-                  loaded="true"
-                >
-              </a>
-            </div>
-            <div class="mint-swipe-item is-active" style>
+            <div
+              v-for="(i,index) in img"
+              :key="index"
+              class="mint-swipe-item"
+              :class="{'is-active':page==index}"
+
+            >
               <a href="https://m.yaya.cn/product/73640.html?from=banner">
-                <img
-                  src="https://img2.yaya.cn/newstatic/1379/b6b44920962efd.jpg.webp"
-                  width
-                  height
-                  class="lazy-img"
-                  loaded="true"
-                >
-              </a>
-            </div>
-            <div class="mint-swipe-item" style="transform: translate3d(-375px, 0px, 0px);">
-              <a href="https://m.yaya.cn/event/2964.html?from=banner">
-                <img
-                  src="https://img2.yaya.cn/newstatic/1381/b874c551429c87.jpg.webp"
-                  width
-                  height
-                  class="lazy-img"
-                  loaded="true"
-                >
-              </a>
-            </div>
-            <div class="mint-swipe-item" style="transform: translate3d(-375px, 0px, 0px);">
-              <a href="https://m.yaya.cn/product/73255.html?from=banner">
-                <img
-                  src="https://img2.yaya.cn/newstatic/1381/a26c13efb676a1.jpg.webp"
-                  width
-                  height
-                  class="lazy-img"
-                  loaded="true"
-                >
-              </a>
-            </div>
-            <div class="mint-swipe-item" style="transform: translate3d(-375px, 0px, 0px);">
-              <a href="https://m.yaya.cn/product/72753.html?from=banner">
-                <img
-                  src="https://img2.yaya.cn/newstatic/1380/b45ed2b097af21.jpg.webp"
-                  width
-                  height
-                  class="lazy-img"
-                  loaded="true"
-                >
-              </a>
-            </div>
-            <div class="mint-swipe-item" style="transform: translate3d(-375px, 0px, 0px);">
-              <a href="https://m.yaya.cn/product/72965.html?from=banner">
-                <img
-                  src="https://img2.yaya.cn/newstatic/1383/b44b7c187ea286.jpg.webp"
-                  width
-                  height
-                  class="lazy-img"
-                  loaded="true"
-                >
+                <img :src="i.imgurl" width height class="lazy-img" loaded="true">
               </a>
             </div>
           </div>
           <div class="mint-swipe-indicators">
-            <div class="mint-swipe-indicator"></div>
-            <div class="mint-swipe-indicator is-active"></div>
-            <div class="mint-swipe-indicator"></div>
-            <div class="mint-swipe-indicator"></div>
-            <div class="mint-swipe-indicator"></div>
-            <div class="mint-swipe-indicator"></div>
+            <div
+              v-for="(i,index) in img"
+              :key="index"
+              class="mint-swipe-indicator"
+              :class="{'is-active':page==index}"
+            ></div>
           </div>
         </div>
       </div>
@@ -86,7 +31,49 @@
 </template>
 
 <script>
-export default {};
+import banner1 from "../assets/banner1.jpg";
+import banner2 from "../assets/banner2.jpg";
+import banner3 from "../assets/banner3.jpg";
+import banner4 from "../assets/banner4.jpg";
+import banner5 from "../assets/banner5.jpg";
+import banner6 from "../assets/banner6.jpg";
+
+export default {
+  name: "Gbanner",
+  data() {
+    return {
+      img: [
+        {
+          imgurl: banner1
+        },
+        {
+          imgurl: banner2
+        },
+        {
+          imgurl: banner3
+        },
+        {
+          imgurl: banner4
+        },
+        {
+          imgurl: banner5
+        },
+        {
+          imgurl: banner6
+        }
+      ],
+      page: 0
+    };
+  },
+  created() {
+    setInterval(() => {
+      this.page++;
+      if (this.page == 6) {
+        this.page = 0;
+      }
+    }, 2000);
+  }
+};
 </script>
 
 <style type="text/css" >
