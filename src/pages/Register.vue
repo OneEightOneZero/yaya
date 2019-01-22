@@ -1,20 +1,17 @@
 <template>
 <body class="yaya">
   <div class="app-wrap">
-    <!---->
     <div>
       <div class="flex-child-noshrink">
-        <!---->
         <header class="header">
           <div class="wrapper">
-            <!---->
             <div
               class="main flex flex-justify-between relative bb"
               style="background-color: rgba(250, 250, 250, 0.980392);"
             >
               <div class="left-side">
                 <router-link
-                to="/app/mine"
+                  to="/app/mine"
                   href="javascript:;"
                   class="back-button flex flex-center"
                   style="color: rgb(51, 51, 51); padding-left: 0px;"
@@ -36,31 +33,42 @@
             <div class="item-icon">
               <i class="fa fa-mobile font-24 grey-6"></i>
             </div>
-            <input type="text" placeholder="手机号码" class="login-input flex-child-grow">
+            <input
+              @click="focus"
+              type="text"
+              placeholder="手机号码"
+              class="login-input flex-child-grow"
+              v-model="user"
+            >
           </div>
           <div class="login-item border-bottom flex flex-align-center">
             <div class="item-icon">
               <i class="fa fa-adjust font-16 grey-6"></i>
             </div>
-            <input type="text" placeholder="密码" class="login-input flex-child-grow">
+            <input
+              type="password"
+              placeholder="密码"
+              class="login-input flex-child-grow"
+              v-model="password"
+            >
           </div>
-          <div class="flex flex-align-center" style="margin-top: 20px; display: none;">
+          <div v-show="show" class="red" v-text="details"></div>
+          <a
+            @click="register"
+            href="javascript:;"
+            class="login-button flex flex-center grey-d-bg"
+            :class="{'blue-bg':(user.length>0&&password.length>0)}"
+          >
             <span
-              data-v-bd4fb5da
-              class="checkbox checked"
-              style="background: rgb(79, 185, 159); border-color: rgb(79, 185, 159); zoom: 0.8;"
-            ></span>
-            <span style="margin-left: 6px;">
-              我已阅读并同意
-              <a href="/help/12526.html" class="blue">《丫丫网用户协议》</a>
-            </span>
-          </div>
-          <a href="javascript:;" class="login-button flex flex-center grey-d-bg">
-            <span class="font-32 white">下一步</span>
+              class="font-32"
+              :class="{
+              'white':!(user.length>0&&password.length>0)
+              }"
+            >注册</span>
           </a>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
   <div
     class="progress"
@@ -70,9 +78,53 @@
 </template>
 
 <script>
-
+import { ServerUrl } from "../configs/ServerUrl.js";
+import qs from "qs";
 export default {
-  name: "news"
+  name: "Register",
+  data() {
+    return {
+      user: "",
+      password: "",
+      show: false,
+      details:""
+    };
+  },
+  methods: {
+    register() {
+      if (this.user.trim().length > 0 && this.password.trim().length > 0) {
+        if (/^1[3578]\d{9}$/.test(this.user)) {
+          this.$axios
+            .post(
+              ServerUrl + "/users/register",
+              qs.stringify({
+                user: this.user,
+                password: this.password
+              }),
+              {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                }
+              }
+            )
+            .then(()=> {
+              location.href="/";
+            });
+        } else {
+          this.show = true;
+          this.details="手机号有误";
+          this.user = "";
+          this.password = "";
+        }
+      }else{
+        this.show = true;
+        this.details="手机号或密码不能为空";
+      }
+    },
+    focus() {
+      this.show = false;
+    }
+  }
 };
 </script>
 

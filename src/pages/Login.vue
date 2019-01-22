@@ -9,13 +9,10 @@
     >
   </div>
   <div class="app-wrap">
-    <!---->
     <div class="wrapper">
       <div class="flex-child-noshrink light-bg">
-        <!---->
         <header class="header">
           <div class="wrapper">
-            <!---->
             <div
               class="main flex flex-justify-between relative bb"
               style="background-color: rgba(250, 250, 250, 0.98);"
@@ -44,15 +41,12 @@
             <i class="fa fa-user-o font-18 grey-6"></i>
           </div>
           <input type="text" placeholder="用户名/手机号" class="login-input flex-child-grow">
-          <!---->
         </div>
         <div class="login-item border-bottom flex flex-align-center">
           <div class="item-icon">
             <i class="fa fa-unlock-alt font-20 grey-6"></i>
           </div>
           <input type="password" placeholder="请输入密码" class="login-input flex-child-grow">
-          <!---->
-          <!---->
         </div>
       </div>
       <a
@@ -66,9 +60,6 @@
         <router-link to="/register" href="javascript:;" class>新用户注册</router-link>
         <a href="/account/findpwd" class>忘记密码</a>
       </div>
-      <!---->
-      <!---->
-      <!---->
     </div>
   </div>
 
@@ -81,8 +72,7 @@
 </template>
 
 <script>
-
-export default { };
+export default {};
 </script>
 
 <style src="../assets/css/loginReg.css" scoped>
