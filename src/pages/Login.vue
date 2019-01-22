@@ -62,7 +62,7 @@
         <span class="font-16 white">登 录</span>
       </a>
       <div class="flex flex-justify-between" style="margin: 20px;">
-        <a href="/account/register?redirect=%2Fmessage" class>新用户注册</a>
+        <router-link to="/register" href="javascript:;" class>新用户注册</router-link>
         <a href="/account/findpwd" class>忘记密码</a>
       </div>
       <!---->

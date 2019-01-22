@@ -42,7 +42,7 @@
             <div class="item-icon">
               <i class="fa fa-adjust font-16 grey-6"></i>
             </div>
-            <input type="text" placeholder="手机号码" class="login-input flex-child-grow">
+            <input type="text" placeholder="密码" class="login-input flex-child-grow">
           </div>
           <div class="flex flex-align-center" style="margin-top: 20px; display: none;">
             <span

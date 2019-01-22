@@ -1,21 +1,22 @@
 <template>
   <div class="floor">
-    <div>
       <div id="top-banner-1039463340404863158">
         <div class="mint-swipe banner banner-dot">
-          <div class="mint-swipe-items-wrap">
+          <transition-group tag="div" :name="transitionName" class="mint-swipe-items-wrap" id="bigBox">
             <div
-              
+              @touchstart.stop.prevent="touchstart"
+              @touchmove.stop.prevent="touchmove"
+              @touchend.stop.prevent="touchend"
               v-for="(i,index) in img"
-              :key="i.imgurl"
-              class="mint-swipe-item slide-fade-enter-active"
-              :class="{'is-active':page==index}"
+              :key="index+1"
+              class="mint-swipe-item box"
+              v-show="index==page"
             >
               <a href="https://m.yaya.cn/product/73640.html?from=banner">
                 <img :src="i.imgurl" width height class="lazy-img" loaded="true">
               </a>
             </div>
-          </div>
+          </transition-group>
           <div class="mint-swipe-indicators">
             <div
               v-for="(i,index) in img"
@@ -26,7 +27,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -62,15 +62,64 @@ export default {
           imgurl: banner6
         }
       ],
-      page: 0
+      transitionName:'list',
+      page: 0,
+      timer: "",
+      startPointX: 0,
+      changePointX: 0,
+      leftSlide: 0,
+      boxWidth: 0,
+      box: null
     };
   },
-  created() {
-    setInterval(() => {
-      this.page++;
-      if (this.page == 6) {
+  methods: {
+    autoplay() {
+      if (this.page == this.img.length) {
         this.page = 0;
+      }else if(this.page<0){
+        this.page = 5;
       }
+    },
+    go() {
+      this.timer = setInterval(() => {
+        this.page++;
+        this.autoplay();
+      }, 2000);
+    },
+    stop() {
+      clearInterval(this.timer);
+      this.timer = null;
+    },
+    touchstart(e) {
+      this.stop();
+      this.startPointX = e.changedTouches[0].pageX;
+      this.box = document.querySelectorAll(".box");
+      this.boxWidth = this.box[0].offsetWidth;
+    },
+    touchmove(e) {
+      if (this.startPointX == this.changePointX) {
+        return;
+      }
+      let currPointX = e.changedTouches[0].pageX;
+      this.leftSlide = this.startPointX - currPointX;
+    },
+    touchend() {
+      this.go();
+      if (this.leftSlide > this.boxWidth / 3) {
+        this.transitionName ='list';
+        this.page++;
+        this.autoplay();
+      }else if(-this.leftSlide > this.boxWidth / 3){
+        this.transitionName ='list2';
+        this.page--;
+        this.autoplay();
+      }
+    }
+  },
+  created() {
+    this.timer = setInterval(() => {
+      this.page++;
+      this.autoplay()
     }, 2000);
   }
 };
@@ -165,11 +214,10 @@ export default {
 }
 .mint-swipe-items-wrap > div {
   position: absolute;
-  -webkit-transform: translateX(-100%);
-  transform: translateX(-100%);
+  /* transform: translateX(100%); */
   width: 100%;
   height: 100%;
-   transition: all 1s;
+  /* display: none; */
 }
 .banner {
   width: 100%;
@@ -178,16 +226,10 @@ export default {
   box-sizing: border-box;
   background: linear-gradient(#e10f02, #e10f02 70%, #fff 0, #fff);
 }
-.mint-swipe-items-wrap > div.is-active {
+/* .mint-swipe-items-wrap > div.is-active {
   display: block;
-  -webkit-transform: translateX(-100%);
-  transform: translateX(-100%);
-}
-.mint-swipe-items-wrap > div.is-active {
-  display: block;
-  -webkit-transform: none;
-  transform: none;
-}
+  
+} */
 .mint-swipe-indicators {
   position: absolute;
   bottom: 10px;
@@ -207,7 +249,39 @@ export default {
 .mint-swipe-indicator.is-active {
   background: #fff;
 }
+.list-enter-to {
+  transition: all 1s ease;
+  transform: translateX(0);
+}
 
-/* style="{'transform':page==index?'none':' translate3d(-375px, 0px, 0px)'}" */
+.list-leave-active {
+  transition: all 1s ease;
+  transform: translateX(-110%);
+}
+
+.list-enter {
+  transform: translateX(110%);
+}
+
+.list-leave {
+  transform: translateX(0);
+}
+.list2-enter-to {
+  transition: all 1s ease;
+  transform: translateX(0);
+}
+
+.list2-leave-active {
+  transition: all 1s ease;
+  transform: translateX(110%);
+}
+
+.list2-enter {
+  transform: translateX(-110%);
+}
+
+.list2-leave {
+  transform: translateX(0);
+}
 </style>
 
