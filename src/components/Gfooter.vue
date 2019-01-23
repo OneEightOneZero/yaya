@@ -60,15 +60,25 @@ export default {
           imgurl2: mine2,
           rout:"/app/mine"
         }
-      ],
-      page:0
+      ]
     };
+  },
+  computed:{
+    page(){
+      return this.$store.state.count
+    }
   },
   methods:{
       tab(index){
-          this.page = index;
+          sessionStorage.setItem('count',index);
+          this.$store.commit('editcount',index);
       }
-  }
+  },
+  // created(){
+  //   console.log(this.$store.state.count)
+  //   this.$store.commit('editcount',2)
+  //   console.log(this.$store.state.count)
+  // }
 };
 </script>
 <style scoped>
