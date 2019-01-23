@@ -292,7 +292,7 @@ export default {
       this.isLogin = status;
     },
     autoLogin() {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         this.$.ajax({
           type: "POST",
           data: {
@@ -304,7 +304,7 @@ export default {
           }
         });
       });
-    }
+    } 
   },
   async mounted() {
     let data = await this.autoLogin();
