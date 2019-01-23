@@ -77,7 +77,7 @@ export default {
       if (this.page == this.img.length) {
         this.page = 0;
       }else if(this.page<0){
-        this.page = 5;
+        this.page = this.img.length-1;
       }
     },
     go() {

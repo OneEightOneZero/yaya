@@ -21,8 +21,9 @@
               class="inline-block overflow-hide"
               style="white-space: nowrap; padding: 0px 5px; height: 40px;"
             >
-              <a
-                @click="navTab(index)"
+              <router-link
+                :to="`/app/yaya/${index+1}`"
+                @click.native="navTab(index)"
                 v-for="(n,index) in nav"
                 :key="index"
                 href="javascript:;"
@@ -30,7 +31,7 @@
                 :class="{'cur':page==index}"
               >
                 <span class="relative" v-text="n"></span>
-              </a>
+              </router-link>
             </div>
           </div>
         </div>
@@ -45,12 +46,12 @@ export default {
   name: "Gheader",
   data() {
     return {
-      nav: ["手机推荐", "电脑办公", "智能穿戴", "头条"],
+      nav: ["手机推荐", "电脑办公", "智能穿戴", "数码影音"],
       page: 0
     };
   },
   methods: {
-    navTab(index) {
+    navTab(index) {    
       this.page = index;
     }
   }

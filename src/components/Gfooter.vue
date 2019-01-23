@@ -35,7 +35,7 @@ export default {
           text: "首页",
           imgurl: home,
           imgurl2: home2,
-          rout:"/app/yaya"
+          rout:"/app/yaya/1"
         },
         {
           text: "分类",

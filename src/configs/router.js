@@ -23,7 +23,7 @@ const routes = [
         children: [
             {
                 name: 'yaya',
-                path: 'yaya',
+                path: 'yaya/:id',
                 component: Yaya,
             },
             {
@@ -76,7 +76,7 @@ const routes = [
     {
         path: '/',
         redirect: {
-            name: "yaya"
+            path: 'app/yaya/1'
         }
     }
 
