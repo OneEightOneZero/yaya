@@ -9,11 +9,8 @@
             style="background-color: rgba(0, 0, 0, 0); background-image: url(&quot;https://img2.yaya.cn/newstatic//917/71061e936d4dd8.png&quot;);"
           >
             <div class="left-side"></div>
-            <div
-              class="title flex flex-center"
-              style="left: 44px; right: 44px;"
-            >
-              <h3 class="white font-18 normal" :style="{'opacity':`${show}`}">18306632698</h3>
+            <div class="title flex flex-center" style="left: 44px; right: 44px;">
+              <h3 class="white font-18 normal" :style="{'opacity':`${show}`}" v-text="username"></h3>
             </div>
             <div class="right-side flex flex-center">
               <a href="/member/setting" class="full-height padding-right flex flex-center white">
@@ -62,13 +59,13 @@
             loaded="true"
           >
         </a>
-        <div class="no-login">
+        <div class="no-login" v-show="!isLogin">
           <router-link to="/login" href="javascript:;" class>登录</router-link>
           <span>|</span>
           <router-link to="/register" href="javascript:;" class>注册</router-link>
         </div>
-        <!-- <div class="flex flex-col flex-justify">
-          <h4 class="font-18">18306632698</h4>
+        <div class="flex flex-col flex-justify" v-show="isLogin">
+          <h4 class="font-18" v-text="username"></h4>
           <div class="flex margin-top">
             <div class="flex flex-center">
               <a href="https://m.yaya.cn/vip/#/">
@@ -92,7 +89,7 @@
               <span class="font-13 black">未绑定</span>
             </a>
           </div>
-        </div>-->
+        </div>
       </div>
       <div class="property flex">
         <a
@@ -155,6 +152,7 @@
   </div>
 </template>
 <script>
+import { ServerUrl } from "../configs/ServerUrl.js";
 export default {
   name: "Mine",
   data() {
@@ -273,7 +271,9 @@ export default {
           ]
         }
       ],
-      show: 0
+      username: "",
+      show: 0,
+      isLogin: false
     };
   },
   methods: {
@@ -287,11 +287,31 @@ export default {
       } else {
         this.show = 0;
       }
-    }
+    },
+    upDate(status) {
+      this.isLogin = status;
+    },
+    autoLogin() {
+      return new Promise((resolve) => {
+        this.$.ajax({
+          type: "POST",
+          data: {
+            token: localStorage.getItem("token")
+          },
+          url: ServerUrl + "/users/autoLogin",
+          success(data) {
+            resolve(data);
+          }
+        });
+      });
+    } 
   },
-  mounted() {
+  async mounted() {
+    let data = await this.autoLogin();
+    this.upDate(data.status);
+    this.username = data.username;
     window.addEventListener("scroll", this.watchScroll);
-  },
+  }
 };
 </script>
 <style scoped>

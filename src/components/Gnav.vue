@@ -2,7 +2,7 @@
   <div class="floor">
     <!---->
     <div class="floor-picture flex flex-justify-between">
-      <a v-for="(i,index) in img" :key="index" href="https://m.yaya.cn/bargain/" class="block style7">
+      <a v-for="(i,index) in img" :key="index" href="javascript:;" class="block style7">
         <img
           :src="i.imgurl"
           width

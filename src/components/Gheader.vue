@@ -3,7 +3,7 @@
     <div class="home-header home-header-bg" style="height: 94px;">
       <div class="header wrapper">
         <div class="search-box flex flex-align-center">
-          <a href="/local" class="city-sel flex flex-center flex-child-noshrink white">
+          <a href="/" class="city-sel flex flex-center flex-child-noshrink white">
             <span class="lines-1" style="max-width: 70px;">天河区</span>
             <i class="fa fa-angle-down font-16 ml-5"></i>
           </a>
@@ -45,7 +45,7 @@ export default {
   name: "Gheader",
   data() {
     return {
-      nav: ["推荐", "以旧换新", "手机快修", "头条"],
+      nav: ["手机推荐", "电脑办公", "智能穿戴", "头条"],
       page: 0
     };
   },

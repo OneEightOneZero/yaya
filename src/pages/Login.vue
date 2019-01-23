@@ -102,7 +102,7 @@ export default {
       if (this.user.trim().length > 0 && this.password.trim().length > 0) {
         this.$axios
           .post(
-            ServerUrl + "/users",
+            ServerUrl + "/users/login",
             qs.stringify({
               user: this.user,
               password: this.password
@@ -113,8 +113,9 @@ export default {
               }
             }
           )
-          .then(str => {
-            if (str.data.data != 0) {
+          .then(data => {
+            if (data.data.status == "success") {
+              localStorage.setItem("token", data.data.token);
               location.href = "/";
             } else {
               this.xianshi = true;

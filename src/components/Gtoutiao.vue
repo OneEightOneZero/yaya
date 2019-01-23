@@ -11,7 +11,7 @@
         style="transition: -webkit-transform 0ms ease-in-out 0s; transform: translate3d(0px, 0px, 0px);"
       >
         <a
-          href="https://m.yaya.cn/?tabs=4"
+          href="javascript:;"
           class="tops-item flex flex-justify-between flex-align-center"
         >
           <!---->
@@ -28,7 +28,7 @@
           </div>
         </a>
         <a
-          href="https://m.yaya.cn/?tabs=4"
+          href="javascript:;"
           class="tops-item flex flex-justify-between flex-align-center"
         >
           <!---->
@@ -45,7 +45,7 @@
           </div>
         </a>
         <a
-          href="https://m.yaya.cn/?tabs=4"
+          href="javascript:;"
           class="tops-item flex flex-justify-between flex-align-center"
         >
           <!---->
@@ -62,7 +62,7 @@
           </div>
         </a>
         <a
-          href="https://m.yaya.cn/?tabs=4"
+          href="javascript:;"
           class="tops-item flex flex-justify-between flex-align-center"
         >
           <!---->
@@ -79,7 +79,7 @@
           </div>
         </a>
         <a
-          href="https://m.yaya.cn/?tabs=4"
+          href="javascript:;"
           class="tops-item flex flex-justify-between flex-align-center"
         >
           <!---->
