@@ -1,125 +1,98 @@
 <template>
-  <div
-    
-    
-    class="floor-tops flex flex-align-center flex-justify-between"
-    
-  >
+  <div class="floor-tops flex flex-align-center flex-justify-between">
     <!---->
     <img
-      
       src="//img2.yaya.cn/m/static/assets/news-yaya.99199d98b7d678f8666ff3794f55e550.png"
       class="tops-icon flex-child-noshrink"
     >
-    <div   class="overflow-hide tops-marquee flex-child-grow">
+    <div class="overflow-hide tops-marquee flex-child-grow">
       <div
-        
         class="roll"
         style="transition: -webkit-transform 0ms ease-in-out 0s; transform: translate3d(0px, 0px, 0px);"
       >
         <a
-          
           href="https://m.yaya.cn/?tabs=4"
           class="tops-item flex flex-justify-between flex-align-center"
-          
         >
           <!---->
-          <span  class="flex-child-grow lines-1">华为EMUI9.0上线了SOS紧急求助功能</span>
-          <div  class="relative">
+          <span class="flex-child-grow lines-1">华为EMUI9.0上线了SOS紧急求助功能</span>
+          <div class="relative">
             <img
-              
-              
               src="https://img2.yaya.cn//pic/edt/news/20181119/20181119200809_0379.jpg.webp"
               width
               height
               class="lazy-img flex-child-noshrink"
               loaded="true"
             >
-            <div  class="tops-mask"></div>
+            <div class="tops-mask"></div>
           </div>
         </a>
         <a
-          
           href="https://m.yaya.cn/?tabs=4"
           class="tops-item flex flex-justify-between flex-align-center"
-          
         >
           <!---->
-          <span  class="flex-child-grow lines-1">1499元起 新品华为畅享正式发布！</span>
-          <div  class="relative">
+          <span class="flex-child-grow lines-1">1499元起 新品华为畅享正式发布！</span>
+          <div class="relative">
             <img
-              
-              
               src="https://img2.yaya.cn//pic/edt/news/20181022/20181022175559_4616.jpg.webp"
               width
               height
               class="lazy-img flex-child-noshrink"
               loaded="true"
             >
-            <div  class="tops-mask"></div>
+            <div class="tops-mask"></div>
           </div>
         </a>
         <a
-          
           href="https://m.yaya.cn/?tabs=4"
           class="tops-item flex flex-justify-between flex-align-center"
-          
         >
           <!---->
-          <span  class="flex-child-grow lines-1">现货2000台/iPhoneXS ￥8690比官网低？</span>
-          <div  class="relative">
+          <span class="flex-child-grow lines-1">现货2000台/iPhoneXS ￥8690比官网低？</span>
+          <div class="relative">
             <img
-              
-              
               src="https://img2.yaya.cn//pic/edt/news/20180921/20180921104408_2637.jpg.webp"
               width
               height
               class="lazy-img flex-child-noshrink"
               loaded="true"
             >
-            <div  class="tops-mask"></div>
+            <div class="tops-mask"></div>
           </div>
         </a>
         <a
-          
           href="https://m.yaya.cn/?tabs=4"
           class="tops-item flex flex-justify-between flex-align-center"
-          
         >
           <!---->
-          <span  class="flex-child-grow lines-1">【福利】新iPhone正式亮相，来丫丫网 不用卖肾</span>
-          <div  class="relative">
+          <span class="flex-child-grow lines-1">【福利】新iPhone正式亮相，来丫丫网 不用卖肾</span>
+          <div class="relative">
             <img
-              
-              
               src="https://img2.yaya.cn//pic/edt/news/20180914/20180914152654_9637.jpg.webp"
               width
               height
               class="lazy-img flex-child-noshrink"
               loaded="true"
             >
-            <div  class="tops-mask"></div>
+            <div class="tops-mask"></div>
           </div>
         </a>
         <a
-          
           href="https://m.yaya.cn/?tabs=4"
           class="tops-item flex flex-justify-between flex-align-center"
-          
         >
           <!---->
-          <span  class="flex-child-grow lines-1">荣耀Note10续航对比测试 15%电量开了挂吃鸡啦！</span>
-          <div  class="relative">
+          <span class="flex-child-grow lines-1">荣耀Note10续航对比测试 15%电量开了挂吃鸡啦！</span>
+          <div class="relative">
             <img
-              
-              
               src="https://img2.yaya.cn//pic/edt/news/20180914/20180914153844_4059.jpg.webp"
               width
               height
               class="lazy-img flex-child-noshrink"
               loaded="true"
             >
-            <div  class="tops-mask"></div>
+            <div class="tops-mask"></div>
           </div>
         </a>
       </div>
