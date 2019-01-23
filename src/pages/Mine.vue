@@ -50,7 +50,7 @@
 
     <div class="member-box">
       <div class="member-info flex flex-align-center">
-        <a href="https://m.yaya.cn/user/myinfo.aspx">
+        <router-link to="/info" href="javascript:;">
           <img
             src="https://img2.yaya.cn//images/usericon.png.webp"
             width
@@ -58,7 +58,7 @@
             class="lazy-img avatar"
             loaded="true"
           >
-        </a>
+        </router-link>
         <div class="no-login" v-show="!isLogin">
           <router-link to="/login" href="javascript:;" class>登录</router-link>
           <span>|</span>

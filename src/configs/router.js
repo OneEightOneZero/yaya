@@ -12,6 +12,8 @@ import Mine from '../pages/Mine.vue'
 import Search from '../pages/Search.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
+import Info from '../pages/Info.vue'
+import EditInfo from '../pages/EditInfo.vue'
 
 const routes = [
     {
@@ -60,6 +62,16 @@ const routes = [
         name: 'register',
         path: '/register',
         component: Register
+    },
+    {
+        name:'info',
+        path:'/info',
+        component:Info
+    },
+    {
+        name:'editinfo',
+        path:'/editinfo/:name',
+        component:EditInfo
     },
     {
         path: '/',
