@@ -14,6 +14,7 @@ import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import Info from '../pages/Info.vue'
 import EditInfo from '../pages/EditInfo.vue'
+import Detail from '../pages/Detail.vue'
 
 const routes = [
     {
@@ -72,6 +73,11 @@ const routes = [
         name:'editinfo',
         path:'/editinfo/:name',
         component:EditInfo
+    },
+    {
+        name:'detail',
+        path:'/detail',
+        component:Detail
     },
     {
         path: '/',
