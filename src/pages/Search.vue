@@ -27,20 +27,21 @@
         </div>
       </header>
     </div>
-    <div data-v-139c2f46 class="search-guess white-bg">
-      <a
+    <div class="search-guess white-bg">
+      <router-link
+        :to="`/detail?guid=${s.guid}`"
         v-for="(s,index) in selData"
         :key="index"
-        data-v-139c2f46
+       
         href="javascript:"
         class="flex flex-align-center flex-justify-between border-bottom"
       >
-        <div data-v-139c2f46 class="flex flex-align-center">
-          <i data-v-139c2f46 class="fa fa-search grey-9"></i>
-          <span data-v-139c2f46 class="lines-1" v-text="s.name"></span>
+        <div class="flex flex-align-center">
+          <i class="fa fa-search grey-9"></i>
+          <span class="lines-1" v-text="s.name"></span>
         </div>
-        <i data-v-139c2f46 class="fa fa-angle-right font-24 grey-9 flex-child-noshrink"></i>
-      </a>
+        <i class="fa fa-angle-right font-24 grey-9 flex-child-noshrink"></i>
+      </router-link>
     </div>
     <div class="cell-title white-bg grey-9">热搜</div>
     <div class="hot-search white-bg">

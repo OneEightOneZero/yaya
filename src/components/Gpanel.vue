@@ -32,7 +32,8 @@
     </div>
     <div class="floor">
       <div class="floor-product flex flex-justify-between flex-wrap padding-top" style>
-        <a
+        <router-link
+          :to="`/detail?guid=${i.guid}`"
           v-for="(i,index) in list"
           :key="index"
           href="javascript:;"
@@ -49,7 +50,7 @@
               <span class="red font-15" v-text="i.price"></span>
             </div>
           </div>
-        </a>
+        </router-link>
       </div>
     </div>
   </div>

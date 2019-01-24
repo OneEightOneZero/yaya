@@ -9,7 +9,7 @@
           >
             <div class="left-side">
               <a
-                href="javascript:;"
+                href="/"
                 class="back-button flex flex-center"
                 style="color: rgb(51, 51, 51); padding-left: 0px;"
               >
@@ -92,7 +92,8 @@
             <p class="cate-title bold font-12">所有商品</p>
           </div>
           <div class="flex flex-wrap white-bg">
-            <a
+            <router-link
+              :to="`/detail?guid=${s.guid}`"
               v-for="(s,index) in shuju"
               :key="index"
               href="javascript:"
@@ -100,7 +101,7 @@
             >
               <img :src="s.imgurl" width height class="lazy-img" loaded="true">
               <span class="font-12 lines-1" v-text="s.name"></span>
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -168,9 +169,9 @@ export default {
     }
   },
   async created() {
-    this.$store.commit("editLoding",true);
+    this.$store.commit("editLoading",true);
     this.allshuju = await this.chashouji();
-    this.allshuju?this.$store.commit("editLoding",false):null;
+    this.allshuju?this.$store.commit("editLoading",false):null;
     this.shuju = this.allshuju.filter(item => {
       return item.type == "phone";
     });

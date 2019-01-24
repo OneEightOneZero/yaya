@@ -13,7 +13,7 @@ const store = new Vuex.Store({
         editcount(state, data) {
             state.count = data;
         },
-        editLoding(state, bool) {
+        editLoading(state, bool) {
             state.loadingStatus = bool
         },
         editLoad(state, bool) {
@@ -21,7 +21,7 @@ const store = new Vuex.Store({
         }
     },
     getters: {
-        getLoding(state) {
+        getLoading(state) {
             return state.loadingStatus
         },
         getLoad(state) {
