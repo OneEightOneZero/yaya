@@ -132,15 +132,95 @@
             <i class="small-icon star-o"></i>
             <span>收藏</span>
           </a>
-          <a
-            href="/trade/cart"
+          <router-link
+            to="/app/cart"
+            href="javascript:;"
             class="btn-small flex flex-col flex-justify-center flex-align-center relative"
           >
             <i class="small-icon cart"></i>
             <span>购物车</span>
-          </a>
-          <a href="javascript:;" class="btn-big flex-child-average">加入购物车</a>
-          <a href="javascript:;" class="btn-big flex-child-average red">立即购买</a>
+          </router-link>
+          <a
+            @click="showcanshu($event)"
+            href="javascript:;"
+            class="btn-big flex-child-average"
+          >加入购物车</a>
+          <a
+            @click="showcanshu($event)"
+            href="javascript:;"
+            class="btn-big flex-child-average red"
+          >立即购买</a>
+        </div>
+      </div>
+      <div v-show="canshu">
+        <div class="dialog-mask"></div>
+        <div class="popup-layer-wrapper buy-layer">
+          <div class="popup-content">
+            <a @click="showcanshu($event)" href="javascript:;" class="btn-popup-close fa fa-times"></a>
+            <div class="buy-product-header border-bottom">
+              <p class="buy-product-price red">
+                ¥
+                8730.00
+              </p>
+
+              <p class="grey-9 font-12">商品编号：68397</p>
+              <p
+                class="grey-6 font-12"
+                style="line-height: 1.33; text-align: justify; margin-top: 5px;"
+              >已选：iPhone XS Max 金色 64GB</p>
+              <div class="buy-img-box pointer white-bg">
+                <img
+                  data-v-5a16bdb8
+                  src="https://img2.yaya.cn/pic/product/160x160/20181207094157912.jpg.webp"
+                  width
+                  height
+                  class="lazy-img"
+                  loaded="true"
+                >
+              </div>
+            </div>
+            <div class="buy-product-content" style="overscroll-behavior: contain contain;">
+              <div class="buy-product-module">
+                <div class="buy-module-title">
+                  <span class="sku-title">颜色</span>
+                </div>
+                <div class="buy-module-content flex flex-wrap">
+                  <div class="svg-btn">
+                    <a href="javascript:;" class="btn-buy btn-small active">金色</a>
+                  </div>
+                  <div class="svg-btn">
+                    <a href="javascript:;" class="btn-buy btn-small">银色</a>
+                  </div>
+                  <div class="svg-btn">
+                    <a href="javascript:;" class="btn-buy btn-small">深空灰色</a>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="buy-module-count flex flex-justify-between flex-align-center border-top border-bottom"
+              >
+                <div>数量</div>
+                <div class="buy-module-content flex flex-wrap">
+                  <a href="javascript:;" class="btn-tiny btn-minus disable">
+                    <i aria-hidden="true" class="fa fa-minus"></i>
+                  </a>
+                  <span class="product-number">1</span>
+                  <a href="javascript:;" class="btn-tiny btn-plus">
+                    <i aria-hidden="true" class="fa fa-plus"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="buy-product-module">
+                <div class="buy-module-title">配置</div>
+                <div class="buy-module-content mt-5">
+                  <span class="buy-content-text">充电器x1，数据线x1，耳机x1（内置3174mAh电池）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="popup-btns-row">
+            <a href="javascript:;" v-text="txt"></a>
+          </div>
         </div>
       </div>
     </div>
@@ -149,7 +229,7 @@
 </template>
 <script>
 import { ServerUrl } from "../configs/ServerUrl";
-import Gloading from "../components/Gloading.vue"
+import Gloading from "../components/Gloading.vue";
 export default {
   name: "fenlei",
   components: {
@@ -158,7 +238,9 @@ export default {
   data() {
     return {
       sp: [],
-      menu:false
+      txt: "",
+      menu: false,
+      canshu: false
     };
   },
   computed: {
@@ -167,8 +249,12 @@ export default {
     }
   },
   methods: {
-    show(){
-      this.menu=!this.menu;
+    show() {
+      this.menu = !this.menu;
+    },
+    showcanshu(e) {
+      this.canshu = !this.canshu;
+      this.txt = e.target.text;
     },
     getData() {
       let n = this;
