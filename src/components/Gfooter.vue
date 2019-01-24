@@ -6,7 +6,6 @@
         @click.native="tab(index)"
         v-for="(f,index) in footerText"
         :key="index"
-        
         class="tab-bar-item flex flex-col flex-center relative"
         :class="{'font-color':page == index}"
       >
@@ -35,50 +34,57 @@ export default {
           text: "首页",
           imgurl: home,
           imgurl2: home2,
-          rout:"/app/yaya/1"
+          rout: "/app/yaya/1"
         },
         {
           text: "分类",
           imgurl: fenlei,
           imgurl2: fenlei2,
-          rout:"/app/fenlei"
+          rout: "/app/fenlei"
         },
         {
           text: "消息",
           imgurl: news,
-          rout:"/app/yaya"
+          rout: "/app/news"
         },
         {
           text: "购物车",
           imgurl: cart,
           imgurl2: cart2,
-          rout:"/app/cart"
+          rout: "/app/cart"
         },
         {
           text: "我的",
           imgurl: mine,
           imgurl2: mine2,
-          rout:"/app/mine"
+          rout: "/app/mine"
         }
-      ]
+      ],
+      page: 0
     };
   },
-  computed:{
-    page(){
-      return this.$store.state.count
+  methods: {
+    tab(index) {
+      this.page = index;
     }
   },
-  methods:{
-      tab(index){
-          sessionStorage.setItem('count',index);
-          this.$store.commit('editcount',index);
-      }
-  },
-  // created(){
-  //   console.log(this.$store.state.count)
-  //   this.$store.commit('editcount',2)
-  //   console.log(this.$store.state.count)
-  // }
+  created() {
+    if (this.$route.fullPath.indexOf("yaya") != -1) {
+      this.page = 0;
+    }
+    if (this.$route.fullPath.indexOf("fenlei") != -1) {
+      this.page = 1;
+    }
+    if (this.$route.fullPath.indexOf("news") != -1) {
+      this.page = 2;
+    }
+    if (this.$route.fullPath.indexOf("cart") != -1) {
+      this.page = 3;
+    }
+    if (this.$route.fullPath.indexOf("mine") != -1) {
+      this.page = 4;
+    }
+  }
 };
 </script>
 <style scoped>

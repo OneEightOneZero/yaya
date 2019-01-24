@@ -1,15 +1,15 @@
 <template>
-  <div class="wrapper grey-f-bg">
+  <div class="wrapper grey-f-bg" style="margin-bottom:50px;">
     <div class="flex-child-noshrink">
       <header class="header">
-        <div class="wrapper" >
+        <div class="wrapper">
           <div
             class="main flex flex-justify-between relative bb"
             style="background-color: rgba(250, 250, 250, 0.98);"
           >
             <div class="left-side">
               <a
-                href="javascript:;"
+                href="/"
                 class="back-button flex flex-center"
                 style="color: rgb(51, 51, 51); padding-left: 0px;"
               >
@@ -18,10 +18,10 @@
               </a>
             </div>
             <div class="title flex flex-center" style="left: 44px; right: 44px;">
-              <a href="/search-form" class="search flex flex-align-center">
+              <router-link to="/search" href="javascript:;" class="search flex flex-align-center">
                 <i class="fa fa-search grey-9"></i>
                 <span class="grey-9 lines-1">iPhone XS Max</span>
-              </a>
+              </router-link>
             </div>
             <div class="right-side flex flex-center">
               <a
@@ -52,7 +52,7 @@
                 <i class="fa fa-shopping-cart"></i>
                 <span>购物车</span>
               </router-link>
-              <router-link  to="/app/mine" href="javascript:;" class="flex flex-col flex-center">
+              <router-link to="/app/mine" href="javascript:;" class="flex flex-col flex-center">
                 <i class="fa fa-user"></i>
                 <span>我的</span>
               </router-link>
@@ -66,34 +66,14 @@
       <div class="sticky" id="sticky" style="top: 0px; left: 0px; float: left; height: 100%;">
         <div class="cate-parent border-right" style="height: 667px;">
           <a
+            @click="tab(index)"
+            v-for="(n,index) in nav"
+            :key="index"
             href="javascript:;"
-            class="cate-parent-item flex flex-center border-bottom main-color grey-f-bg"
+            class="cate-parent-item flex flex-center border-bottom"
+            :class="{'main-color':page==index,'grey-f-bg':page==index}"
           >
-            <span>手机通讯</span>
-          </a>
-          <a href="javascript:;" class="cate-parent-item flex flex-center border-bottom">
-            <span>手机配件</span>
-          </a>
-          <a href="javascript:;" class="cate-parent-item flex flex-center border-bottom">
-            <span>电脑办公</span>
-          </a>
-          <a href="javascript:;" class="cate-parent-item flex flex-center border-bottom">
-            <span>智能穿戴</span>
-          </a>
-          <a href="javascript:;" class="cate-parent-item flex flex-center border-bottom">
-            <span>数码影音</span>
-          </a>
-          <a href="javascript:;" class="cate-parent-item flex flex-center border-bottom">
-            <span>智能家居</span>
-          </a>
-          <a href="javascript:;" class="cate-parent-item flex flex-center border-bottom">
-            <span>智能出行</span>
-          </a>
-          <a href="javascript:;" class="cate-parent-item flex flex-center border-bottom">
-            <span>娱乐竞技</span>
-          </a>
-          <a href="javascript:;" class="cate-parent-item flex flex-center border-bottom">
-            <span>智能健康</span>
+            <span v-text="n"></span>
           </a>
         </div>
       </div>
@@ -107,269 +87,21 @@
             loaded="true"
           >
         </a>
-
         <div class="cate-item-wrap">
           <div class="flex flex-align-center flex-justify-between">
-            <p class="cate-title bold font-12">热门品牌</p>
+            <p class="cate-title bold font-12">所有商品</p>
           </div>
           <div class="flex flex-wrap white-bg">
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201809140531500.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">苹果</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201803300129520.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">华为</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201807030258550.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">OPPO</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201804261013130.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">荣耀</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201807030258420.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">小米</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201807030259140.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">vivo</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201803070423400.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">三星</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201807030259350.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">美图</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201804230503160.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">魅族</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201805160237240.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">锤子手机</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201806150428300.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">一加</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201711291129010.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">金立</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201805160255430.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">努比亚</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201805160255000.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">360</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201805160254260.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">索尼</span>
-            </a>
-          </div>
-        </div>
-        <div class="cate-item-wrap">
-          <div class="flex flex-align-center flex-justify-between">
-            <p class="cate-title bold font-12">更多品牌</p>
-          </div>
-          <div class="flex flex-wrap white-bg">
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201804180537480.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">黑鲨</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201706270416470.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">摩托罗拉</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201708180444050.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">夏普</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201708180444320.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">黑莓</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201711140122260.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">诺基亚</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201706210351200.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">酷派</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201805160301100.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">中兴</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201805160301200.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">AGM旅行手机</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201805221129570.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">联想</span>
-            </a>
-            <a href="javascript:" class="cate-item flex flex-col flex-center">
-              <img
-                src="https://img2.yaya.cn/pic/category/201805160254030.jpg.webp"
-                width
-                height
-                class="lazy-img"
-                loaded="true"
-              >
-              <span class="font-12 lines-1">全部手机</span>
-            </a>
+            <router-link
+              :to="`/detail?guid=${s.guid}`"
+              v-for="(s,index) in shuju"
+              :key="index"
+              href="javascript:"
+              class="cate-item flex flex-col flex-center"
+            >
+              <img :src="s.imgurl" width height class="lazy-img" loaded="true">
+              <span class="font-12 lines-1" v-text="s.name"></span>
+            </router-link>
           </div>
         </div>
       </div>
@@ -377,17 +109,72 @@
   </div>
 </template>
 <script>
+import { ServerUrl } from "../configs/ServerUrl.js";
 export default {
   name: "fenlei",
   data() {
     return {
+      nav: ["手机推荐", "电脑办公", "智能穿戴", "数码影音"],
+      allshuju: [],
+      shuju: [],
+      page: 0,
       xianshi: false
     };
   },
   methods: {
     show() {
       this.xianshi = !this.xianshi;
+    },
+    tab(index) {
+      this.page = index;
+      switch (this.page) {
+        case 0:
+          this.shuju = this.allshuju.filter(item => {
+            return item.type == "phone";
+          });
+          break;
+        case 1:
+          this.shuju = this.allshuju.filter(item => {
+            return item.type == "computer";
+          });
+          break;
+        case 2:
+          this.shuju = this.allshuju.filter(item => {
+            return item.type == "watch";
+          });
+          break;
+        case 3:
+          this.shuju = this.allshuju.filter(item => {
+            return item.type == "earphone";
+          });
+          break;
+        default:
+          break;
+      }
+    },
+    chashouji() {
+      let n = this;
+      return new Promise(function(resolve) {
+        n.$.ajax({
+          type: "get", //请求方式
+          url: ServerUrl + "/goodlist/findAll",
+          async: true, //异步
+          data: {
+          },
+          success(str) {
+            resolve(str.data);
+          }
+        });
+      });
     }
+  },
+  async created() {
+    this.$store.commit("editLoading",true);
+    this.allshuju = await this.chashouji();
+    this.allshuju?this.$store.commit("editLoading",false):null;
+    this.shuju = this.allshuju.filter(item => {
+      return item.type == "phone";
+    });
   }
 };
 </script>

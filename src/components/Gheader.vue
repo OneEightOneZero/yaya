@@ -8,7 +8,11 @@
             <i class="fa fa-angle-down font-16 ml-5"></i>
           </a>
           <div class="line"></div>
-          <router-link to="/search" href="javascript:;" class="search-btn flex flex-align-center flex-child-grow">
+          <router-link
+            to="/search"
+            href="javascript:;"
+            class="search-btn flex flex-align-center flex-child-grow"
+          >
             <i class="fa fa-search mr-5 white"></i>
             <span class="lines-1">iPhone XS Max</span>
           </router-link>
@@ -51,14 +55,16 @@ export default {
     };
   },
   methods: {
-    navTab(index) {    
+    navTab(index) {
       this.page = index;
     }
+  },
+  created() {
+    this.page = this.$route.params.id - 1;
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .home-header {
   position: fixed;

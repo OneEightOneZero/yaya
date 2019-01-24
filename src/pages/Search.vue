@@ -8,29 +8,41 @@
             style="background-color: rgba(250, 250, 250, 0.98);"
           >
             <div class="left-side">
-              <router-link
-                to="/app/yaya"
-                href="javascript:;"
+              <a
+                href="javascript:history.back();"
                 class="back-button flex flex-center"
                 style="color: rgb(51, 51, 51); padding-left: 0px;"
-              >
-                返回
-              </router-link>
+              >返回</a>
             </div>
             <div class="title flex flex-center" style="left: 44px; right: 44px;">
-              <form action="javascript:return true;" class="search-form">
-                <input type="search" placeholder="iPhone XS Max">
-                <button type="submit" class="hide">搜索</button>
+              <form class="search-form">
+                <input type="search" placeholder="iPhone XS Max" v-model="text">
+                <!-- <button type="submit" class="hide">搜索</button> -->
               </form>
             </div>
             <div class="right-side flex flex-center">
-              <a href="javascript:;" class="search-btn">搜索</a>
+              <a @click="search" href="javascript:;" class="search-btn">搜索</a>
             </div>
           </div>
         </div>
       </header>
     </div>
-
+    <div class="search-guess white-bg">
+      <router-link
+        :to="`/detail?guid=${s.guid}`"
+        v-for="(s,index) in selData"
+        :key="index"
+       
+        href="javascript:"
+        class="flex flex-align-center flex-justify-between border-bottom"
+      >
+        <div class="flex flex-align-center">
+          <i class="fa fa-search grey-9"></i>
+          <span class="lines-1" v-text="s.name"></span>
+        </div>
+        <i class="fa fa-angle-right font-24 grey-9 flex-child-noshrink"></i>
+      </router-link>
+    </div>
     <div class="cell-title white-bg grey-9">热搜</div>
     <div class="hot-search white-bg">
       <a href="javascript:" class="hot-item">iPhone XS</a>
@@ -43,8 +55,38 @@
   </ul>
 </template>
 <script>
+import { ServerUrl } from "../configs/ServerUrl.js";
 export default {
-  name: "Search"
+  name: "Search",
+  data() {
+    return {
+      text: "",
+      selData: []
+    };
+  },
+  methods: {
+    getData() {
+      let n = this;
+      return new Promise(function(resolve) {
+        n.$.ajax({
+          type: "get", //请求方式
+          url: ServerUrl + "/goodlist/findAll",
+          async: true, //异步
+          data: {
+          },
+          success(str) {
+            resolve(str.data);
+          }
+        });
+      });
+    },
+    async search() {
+      let alldata = await this.getData();
+      this.selData = alldata.filter(item => {
+        return item.name.indexOf(this.text) != -1;
+      });
+    }
+  }
 };
 </script>
 <style scoped>

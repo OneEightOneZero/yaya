@@ -13,11 +13,7 @@
         class="tops-icon flex-child-noshrink"
       >
       <div class="overflow-hide tops-marquee flex-child-grow">
-        <transition-group
-          name="list"
-          tag="div"
-          class="roll"
-        >
+        <transition-group name="list" tag="div" class="roll">
           <a
             href="javascript:;"
             class="tops-item flex flex-justify-between flex-align-center"
@@ -27,13 +23,7 @@
           >
             <span class="flex-child-grow lines-1" v-text="b.text"></span>
             <div class="relative">
-              <img
-                :src="b.imgurl"
-                width
-                height
-                class="lazy-img flex-child-noshrink"
-                loaded="true"
-              >
+              <img :src="b.imgurl" width height class="lazy-img flex-child-noshrink" loaded="true">
               <div class="tops-mask"></div>
             </div>
           </a>
@@ -42,7 +32,8 @@
     </div>
     <div class="floor">
       <div class="floor-product flex flex-justify-between flex-wrap padding-top" style>
-        <a
+        <router-link
+          :to="`/detail?guid=${i.guid}`"
           v-for="(i,index) in list"
           :key="index"
           href="javascript:;"
@@ -59,7 +50,7 @@
               <span class="red font-15" v-text="i.price"></span>
             </div>
           </div>
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
@@ -79,8 +70,8 @@ export default {
     autoplay() {
       if (this.page == this.banner.length) {
         this.page = 0;
-      }else if(this.page<0){
-        this.page = this.banner.length-1;
+      } else if (this.page < 0) {
+        this.page = this.banner.length - 1;
       }
     },
     chashouji() {
@@ -101,7 +92,9 @@ export default {
       });
     },
     async getData() {
+      this.$store.commit("editLoad", true);
       var abc = await this.chashouji();
+      abc ? this.$store.commit("editLoad", false) : null;
       this.list = abc;
     }
   },
@@ -111,23 +104,23 @@ export default {
       banner: [
         {
           text: "华为EMUI9.0上线了SOS紧急求助功能",
-          imgurl: ServerUrl+"/images/minBanner/1.png"
+          imgurl: ServerUrl + "/images/minBanner/1.png"
         },
         {
           text: "1499元起 新品华为畅享正式发布！",
-          imgurl: ServerUrl+"/images/minBanner/2.png"
+          imgurl: ServerUrl + "/images/minBanner/2.png"
         },
         {
           text: "现货2000台/iPhoneXS ￥8690比官网低？",
-          imgurl: ServerUrl+"/images/minBanner/3.png"
+          imgurl: ServerUrl + "/images/minBanner/3.png"
         },
         {
           text: "【福利】新iPhone正式亮相，来丫丫网 不用卖肾",
-          imgurl: ServerUrl+"/images/minBanner/4.png"
+          imgurl: ServerUrl + "/images/minBanner/4.png"
         },
         {
           text: "荣耀Note10续航对比测试 15%电量开了挂吃鸡啦！",
-          imgurl: ServerUrl+"/images/minBanner/5.png"
+          imgurl: ServerUrl + "/images/minBanner/5.png"
         }
       ],
       img: [
@@ -148,7 +141,7 @@ export default {
         }
       ],
       type: "phone",
-      page:0
+      page: 0
     };
   },
   computed: {
@@ -182,7 +175,7 @@ export default {
     this.getData();
     this.timer = setInterval(() => {
       this.page++;
-      this.autoplay()
+      this.autoplay();
     }, 2000);
   }
 };
@@ -314,10 +307,10 @@ export default {
 .tops-marquee {
   height: 34px;
 }
-.roll{
-position: relative;
-overflow:hidden;
-height: 34px;
+.roll {
+  position: relative;
+  overflow: hidden;
+  height: 34px;
 }
 .tops-item {
   position: absolute;
