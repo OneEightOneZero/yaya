@@ -69,19 +69,19 @@ export default {
     }
   },
   created() {
-    if (this.$route.fullPath.indexOf("yaya") > 0) {
+    if (this.$route.fullPath.indexOf("yaya") != -1) {
       this.page = 0;
     }
-    if (this.$route.fullPath.indexOf("fenlei") > 0) {
+    if (this.$route.fullPath.indexOf("fenlei") != -1) {
       this.page = 1;
     }
-    if (this.$route.fullPath.indexOf("news") > 0) {
+    if (this.$route.fullPath.indexOf("news") != -1) {
       this.page = 2;
     }
-    if (this.$route.fullPath.indexOf("cart") > 0) {
+    if (this.$route.fullPath.indexOf("cart") != -1) {
       this.page = 3;
     }
-    if (this.$route.fullPath.indexOf("mine") > 0) {
+    if (this.$route.fullPath.indexOf("mine") != -1) {
       this.page = 4;
     }
   }
