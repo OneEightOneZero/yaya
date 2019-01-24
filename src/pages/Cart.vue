@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrap">
+  <div class="app-wrap" style="margin-bottom:50px;">
     <div class="wrapper grey-f-bg full-height">
       <div class="flex-child-noshrink">
         <div style="height: 44px; transition: height 0.2s ease 0s;"></div>
@@ -397,7 +397,7 @@ export default {
   left: 0;
   width: 100%;
   height: 50px;
-  bottom: 0;
+  bottom: 50px;
   background: #fff;
 }
 .settlement {
