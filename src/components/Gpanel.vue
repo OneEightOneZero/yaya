@@ -45,7 +45,7 @@
         <a
           v-for="(i,index) in list"
           :key="index"
-          href="https://m.yaya.cn/product/58206.html"
+          href="javascript:;"
           class="product-item flex flex-col flex-justify-between"
         >
           <img :src="i.imgurl" mode="widthFix" class="product-img">
