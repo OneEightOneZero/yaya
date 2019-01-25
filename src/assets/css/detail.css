@@ -993,3 +993,31 @@
 	width:16px;
 	margin-right:5px
 }
+.cart-number {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    color: #fff;
+    text-align: center;
+    line-height: 15px;
+    top: 2px;
+    right: 5px;
+	font-size: 10px;
+}
+.btns-box .btn-small .small-icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-size: 100%;
+    margin-bottom: 3px;
+    background-repeat: no-repeat;
+	background-position: 50%;
+}
+.kefu{
+	background-image: url(../kefu.png);
+}
+
+.cart{
+	background-image: url(../cart.png);
+}

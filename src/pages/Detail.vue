@@ -129,7 +129,11 @@
             href="javascript:;"
             class="btn-small flex flex-col flex-justify-center flex-align-center"
           >
-            <i class="small-icon star-o"></i>
+            <i
+              @click="tabbkg"
+              class="small-icon star-o"
+              :style="{'backgroundImage': `url(${shoucan})`}"
+            ></i>
             <span>收藏</span>
           </a>
           <router-link
@@ -139,6 +143,7 @@
           >
             <i class="small-icon cart"></i>
             <span>购物车</span>
+            <span class="cart-number red-bg" v-text="totalNum"></span>
           </router-link>
           <a
             @click="showcanshu($event)"
@@ -158,25 +163,15 @@
           <div class="popup-content">
             <a @click="showcanshu($event)" href="javascript:;" class="btn-popup-close fa fa-times"></a>
             <div class="buy-product-header border-bottom">
-              <p class="buy-product-price red">
-                ¥
-                8730.00
-              </p>
-
-              <p class="grey-9 font-12">商品编号：68397</p>
+              <p class="buy-product-price red" v-text="s.price"></p>
+              <p class="grey-9 font-12" v-text="`商品编号：${s.guid}`"></p>
               <p
                 class="grey-6 font-12"
                 style="line-height: 1.33; text-align: justify; margin-top: 5px;"
-              >已选：iPhone XS Max 金色 64GB</p>
+                v-text="yixuancolor"
+              ></p>
               <div class="buy-img-box pointer white-bg">
-                <img
-                  data-v-5a16bdb8
-                  src="https://img2.yaya.cn/pic/product/160x160/20181207094157912.jpg.webp"
-                  width
-                  height
-                  class="lazy-img"
-                  loaded="true"
-                >
+                <img data-v-5a16bdb8 :src="s.imgurl" width height class="lazy-img" loaded="true">
               </div>
             </div>
             <div class="buy-product-content" style="overscroll-behavior: contain contain;">
@@ -185,14 +180,15 @@
                   <span class="sku-title">颜色</span>
                 </div>
                 <div class="buy-module-content flex flex-wrap">
-                  <div class="svg-btn">
-                    <a href="javascript:;" class="btn-buy btn-small active">金色</a>
-                  </div>
-                  <div class="svg-btn">
-                    <a href="javascript:;" class="btn-buy btn-small">银色</a>
-                  </div>
-                  <div class="svg-btn">
-                    <a href="javascript:;" class="btn-buy btn-small">深空灰色</a>
+                  <div v-for="(c,index) in color" :key="index" class="svg-btn">
+                    <a
+                      :ref="`sel${currentColor==index}`"
+                      @click="selColor(index,$event)"
+                      href="javascript:;"
+                      class="btn-buy btn-small"
+                      :class="{'active':currentColor==index}"
+                      v-text="c"
+                    ></a>
                   </div>
                 </div>
               </div>
@@ -201,11 +197,16 @@
               >
                 <div>数量</div>
                 <div class="buy-module-content flex flex-wrap">
-                  <a href="javascript:;" class="btn-tiny btn-minus disable">
+                  <a
+                    @click="reduceNum"
+                    href="javascript:;"
+                    class="btn-tiny btn-minus"
+                    :class="{'disable':num==1}"
+                  >
                     <i aria-hidden="true" class="fa fa-minus"></i>
                   </a>
-                  <span class="product-number">1</span>
-                  <a href="javascript:;" class="btn-tiny btn-plus">
+                  <span class="product-number" v-text="num"></span>
+                  <a @click="addNum" href="javascript:;" class="btn-tiny btn-plus">
                     <i aria-hidden="true" class="fa fa-plus"></i>
                   </a>
                 </div>
@@ -219,7 +220,7 @@
             </div>
           </div>
           <div class="popup-btns-row">
-            <a href="javascript:;" v-text="txt"></a>
+            <a @click="addCart($event)" href="javascript:;" v-text="txt"></a>
           </div>
         </div>
       </div>
@@ -229,6 +230,8 @@
 </template>
 <script>
 import { ServerUrl } from "../configs/ServerUrl";
+import shoucan1 from "../assets/shoucan1.png";
+import shoucan2 from "../assets/shoucan2.png";
 import Gloading from "../components/Gloading.vue";
 export default {
   name: "fenlei",
@@ -238,9 +241,15 @@ export default {
   data() {
     return {
       sp: [],
+      color: ["金色", "深灰色", "黑色"],
+      yixuancolor: "金色",
+      currentColor: 0,
       txt: "",
+      num: 1,
       menu: false,
-      canshu: false
+      canshu: false,
+      totalNum: "",
+      shoucan: shoucan1
     };
   },
   computed: {
@@ -249,12 +258,44 @@ export default {
     }
   },
   methods: {
+    tabbkg() {
+      this.shoucan == shoucan1
+        ? (this.shoucan = shoucan2)
+        : (this.shoucan = shoucan1);
+    },
     show() {
       this.menu = !this.menu;
     },
     showcanshu(e) {
       this.canshu = !this.canshu;
       this.txt = e.target.text;
+    },
+    selColor(index, e) {
+      this.currentColor = index;
+      this.yixuancolor = e.target.text;
+    },
+    reduceNum() {
+      this.num--;
+      if (this.num <= 0) {
+        this.num = 1;
+      }
+    },
+    addNum() {
+      this.num++;
+    },
+    async addCart() {
+      if (this.txt == "加入购物车") {
+        let data = await this.insertCart();
+        if (data) {
+          this.canshu = false;
+          this.totalNum = (await this.getCart()).reduce((prev, item) => {
+            return prev + parseInt(item.num);
+          }, 0);
+        }
+      } else if (this.txt == "立即购买") {
+        await this.insertCart();
+        location.href = "/#/app/cart";
+      }
     },
     getData() {
       let n = this;
@@ -270,11 +311,44 @@ export default {
           }
         });
       });
+    },
+    getCart() {
+      return new Promise(resolve => {
+        this.$.ajax({
+          type: "get",
+          url: ServerUrl + "/goodlist/findCart",
+          data: {
+            token: localStorage.getItem("token")
+          },
+          success(data) {
+            resolve(data.data);
+          }
+        });
+      });
+    },
+    insertCart() {
+      return new Promise(resolve => {
+        this.$.ajax({
+          type: "get",
+          url: ServerUrl + "/goodlist/insertorder",
+          data: {
+            guid: this.guid,
+            num: this.num,
+            token: localStorage.getItem("token")
+          },
+          success(data) {
+            resolve(data.data);
+          }
+        });
+      });
     }
   },
   async created() {
     this.$store.commit("editLoad", true);
     this.sp = await this.getData();
+    this.totalNum = (await this.getCart()).reduce((prev, item) => {
+      return prev + parseInt(item.num);
+    }, 0);
     this.sp ? this.$store.commit("editLoad", false) : null;
   }
 };
