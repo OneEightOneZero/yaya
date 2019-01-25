@@ -11,7 +11,7 @@
             >
               <div class="left-side">
                 <a
-                  href="javascript:;"
+                  href="javascript:history.back();"
                   class="back-button flex flex-center"
                   style="color: rgb(255, 255, 255); padding-left: 0px;"
                 >
@@ -36,10 +36,9 @@
         style="background-image: url(&quot;//img2.ch999img.com/pic/topic/2018091809055194.png&quot;);"
       ></div>
       <div class="bg-card">
-        <h2>( ‘-ωก̀ )</h2>
         <p class="font-13" style="line-height: 18px;">
           共
-          <span>2</span>件商品
+          <span v-text="totalNum"></span>件商品
         </p>
       </div>
 
@@ -47,32 +46,47 @@
         <!-- ====================订单========================= -->
         <div
           class="cart-item border-top border-bottom white-bg"
-          v-for="(i,index) in Cartlist"
+          v-for="(i,index) in cartList"
           :key="index"
         >
           <div class="product">
             <div class="product-item">
               <div class="flex flex-between relative">
                 <span
-                  class="checkbox product-checkbox checked"
-                  style="border-color: rgb(79, 185, 159); background: rgb(79, 185, 159);"
+                  @click="check($event)"
+                  class="checkbox product-checkbox"
+                  :class="{'checked':ischecked}"
+                  :style="{'border-color':ischecked, 'background':ischecked}"
                 ></span>
-                <router-link :to="`/detail?guid=${i.guid}`" href="javascript:;" class="product-img flex-child-noshrink">
+                <router-link
+                  :to="`/detail?guid=${i.guid}`"
+                  href="javascript:;"
+                  class="product-img flex-child-noshrink"
+                >
                   <img :src="i.imgurl" class="full-width full-height">
                 </router-link>
                 <div
                   class="product-info margin-left flex flex-col flex-justify-between flex-child-grow"
                 >
-                  <p class="lines-2" v-text="i.name"></p>
-
+                  <p class="lines-2" v-text="`${i.name} ${i.function}`"></p>
+                  <p v-text="i.color"></p>
                   <div class="flex flex-justify-between flex-align-center">
                     <div>
                       <p class="red" v-text="i.price"></p>
                     </div>
                     <div class="edit-count flex border-left border-bottom">
-                      <a href="javascript:" class="border-top border-right disable">-</a>
-                      <span class="border-top border-right">1</span>
-                      <a href="javascript:" class="border-top border-right">+</a>
+                      <a
+                        @click="reduceNum(i.guid,index)"
+                        href="javascript:"
+                        class="border-top border-right"
+                        :class="{'disable':i.num==1}"
+                      >-</a>
+                      <span class="border-top border-right" v-text="i.num"></span>
+                      <a
+                        @click="addNum(i.guid,index)"
+                        href="javascript:"
+                        class="border-top border-right"
+                      >+</a>
                     </div>
                   </div>
                 </div>
@@ -113,39 +127,58 @@
             <p>
               合计
               ：
-              <span class="red">￥5698.00</span>
+              <span class="red" v-text="`￥${totalMoney}.00`"></span>
             </p>
-            <p class="grey-9">2件商品</p>
+            <p class="grey-9" v-text="`${totalNum}件商品`"></p>
           </div>
 
           <a href="javascript:" class="settlement white flex-child-noshrink main-bgcolor">去结算</a>
         </div>
       </div>
-      <div data-v-e91a6b2c></div>
+      <div></div>
     </div>
-    <Gloading/>
   </div>
 </template>
 <script>
-import Gloading from "../components/Gloading.vue";
 import { ServerUrl } from "../configs/ServerUrl";
 import $ from "jquery";
 export default {
-  name: "news",
-  components: {
-    Gloading
+  name: "Cart",
+  data() {
+    return {
+      guidList: [], //购物车数据渲染
+      tuijian: [], //用户推荐页渲染
+      cartList: [],
+      totalNum: 0,
+      totalMoney: 0,
+      ischecked: false
+    };
   },
   methods: {
-
+    addNum(guid, index) {
+      this.cartList[index].num++;
+      this.editCartNum(guid, 1);
+    },
+    reduceNum(guid, index) {
+      this.cartList[index].num--;
+      if (this.cartList[index].num <= 0) {
+        this.cartList[index].num = 1;
+      } else {
+        this.editCartNum(guid, -1);
+      }
+    },
+    check(index) {
+      this.ischecked = index;
+    },
     //通过token查找用户购买数量和用户名和商品id(guid)
     findCart() {
       return new Promise(function(resolve) {
         $.ajax({
           type: "get",
-          url: ServerUrl + "/goodlist/findCart", 
+          url: ServerUrl + "/goodlist/findCart",
           async: true,
-          data:{
-            token:window.localStorage.token
+          data: {
+            token: window.localStorage.token
           },
           success: function(str) {
             //成功回调
@@ -156,25 +189,37 @@ export default {
     },
 
     //通过商品id(guid)渲染
-    getuserCart() {
+    getuserCart(guid) {
       return new Promise(function(resolve) {
         $.ajax({
           type: "get", //请求方式
           url: ServerUrl + "/goodlist/guid", //接口路径
           async: true, //异步
-          data:{
-            guid:this.cartid
+          data: {
+            guid
           },
           success: function(str) {
-            //成功回调
-            // resolve(str.data);
-            // console.log(str.data);
             resolve(str.data);
           }
         });
       });
     },
-
+    editCartNum(guid, num) {
+      return new Promise(resolve => {
+        this.$.ajax({
+          type: "get",
+          url: ServerUrl + "/goodlist/insertorder",
+          data: {
+            guid,
+            num,
+            token: localStorage.getItem("token")
+          },
+          success(data) {
+            resolve(data.data);
+          }
+        });
+      });
+    },
     //推荐页渲染  !!次要!!
     getData() {
       return new Promise(resolve => {
@@ -191,25 +236,26 @@ export default {
       });
     }
   },
-  data() {
-    return {
-      cartid:[],//存取该用户购买的商品id
-      Cartlist: [],//购物车数据渲染
-      tuijian: []//用户推荐页渲染
-    };
-  },
   async created() {
     this.$store.commit("editLoad", true);
-    this.Cartlist =await this.findCart();//购物车数据第一次获取guid,用户名,num.
-    
+    this.guidList = await this.findCart(); //购物车数据第一次获取guid,用户名,num.
+    // console.log()
     //遍历Cartlist[]拿到用户购买的所有商品guid赋值给cartid[].
-    for(var k = 0;k < this.Cartlist.length;k++){
-      this.cartid.push(this.Cartlist[k].guid);
+    for (let k = 0; k < this.guidList.length; k++) {
+      let good = await this.getuserCart(this.guidList[k].guid);
+      this.totalNum += this.guidList[k].num;
+      this.totalMoney +=
+        this.guidList[k].num * parseInt(good[0].price.slice(1));
+      this.guidList[k].imgurl = good[0].imgurl;
+      this.guidList[k].name = good[0].name;
+      this.guidList[k].function = good[0].function;
+      this.guidList[k].price = good[0].price;
+      this.guidList[k].color = good[0].color;
     }
-    
-    
-    this.tuijian = await this.getData();//推荐页数据获取 !!次要!!
-    this.tuijian,this.Cartlist ? this.$store.commit("editLoad", false) : null;
+    this.cartList = this.guidList;
+
+    this.tuijian = await this.getData(); //推荐页数据获取 !!次要!!
+    this.Cartlist ? this.$store.commit("editLoad", false) : null;
   }
 };
 </script> 
