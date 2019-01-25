@@ -234,28 +234,46 @@ export default {
           }
         });
       });
+    },
+    autoLogin() {
+      return new Promise(resolve => {
+        this.$.ajax({
+          type: "POST",
+          data: {
+            token: localStorage.getItem("token")
+          },
+          url: ServerUrl + "/users/autoLogin",
+          success(data) {
+            resolve(data);
+          }
+        });
+      });
     }
   },
   async created() {
     this.$store.commit("editLoad", true);
-    this.guidList = await this.findCart(); //购物车数据第一次获取guid,用户名,num.
-    // console.log()
-    //遍历Cartlist[]拿到用户购买的所有商品guid赋值给cartid[].
-    for (let k = 0; k < this.guidList.length; k++) {
-      let good = await this.getuserCart(this.guidList[k].guid);
-      this.totalNum += this.guidList[k].num;
-      this.totalMoney +=
-        this.guidList[k].num * parseInt(good[0].price.slice(1));
-      this.guidList[k].imgurl = good[0].imgurl;
-      this.guidList[k].name = good[0].name;
-      this.guidList[k].function = good[0].function;
-      this.guidList[k].price = good[0].price;
-      this.guidList[k].color = good[0].color;
+    let isdenglu = await this.autoLogin();
+    if (isdenglu.status) {
+      this.guidList = await this.findCart(); //购物车数据第一次获取guid,用户名,num.
+      // console.log()
+      //遍历Cartlist[]拿到用户购买的所有商品guid赋值给cartid[].
+      for (let k = 0; k < this.guidList.length; k++) {
+        let good = await this.getuserCart(this.guidList[k].guid);
+        this.totalNum += this.guidList[k].num;
+        this.totalMoney +=
+          this.guidList[k].num * parseInt(good[0].price.slice(1));
+        this.guidList[k].imgurl = good[0].imgurl;
+        this.guidList[k].name = good[0].name;
+        this.guidList[k].function = good[0].function;
+        this.guidList[k].price = good[0].price;
+        this.guidList[k].color = good[0].color;
+      }
+      this.cartList = this.guidList;
+      this.tuijian = await this.getData(); //推荐页数据获取 !!次要!!
+      this.Cartlist ? this.$store.commit("editLoad", false) : null;
+    }else{
+      isdenglu ? this.$store.commit("editLoad", false) : null;
     }
-    this.cartList = this.guidList;
-
-    this.tuijian = await this.getData(); //推荐页数据获取 !!次要!!
-    this.Cartlist ? this.$store.commit("editLoad", false) : null;
   }
 };
 </script> 
