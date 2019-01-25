@@ -47,7 +47,7 @@
         <!-- ====================订单========================= -->
         <div
           class="cart-item border-top border-bottom white-bg"
-          v-for="(i,index) in orderlist"
+          v-for="(i,index) in Cartlist"
           :key="index"
         >
           <div class="product">
@@ -136,12 +136,17 @@ export default {
     Gloading
   },
   methods: {
-    findorder() {
+
+    //通过token查找用户购买数量和用户名和商品id(guid)
+    findCart() {
       return new Promise(function(resolve) {
         $.ajax({
-          type: "get", //请求方式
-          url: ServerUrl + "/goodlist/findorder", //接口路径
-          async: true, //异步
+          type: "get",
+          url: ServerUrl + "/goodlist/findCart", 
+          async: true,
+          data:{
+            token:window.localStorage.token
+          },
           success: function(str) {
             //成功回调
             resolve(str.data);
@@ -149,6 +154,28 @@ export default {
         });
       });
     },
+
+    //通过商品id(guid)渲染
+    getuserCart() {
+      return new Promise(function(resolve) {
+        $.ajax({
+          type: "get", //请求方式
+          url: ServerUrl + "/goodlist/guid", //接口路径
+          async: true, //异步
+          data:{
+            guid:this.cartid
+          },
+          success: function(str) {
+            //成功回调
+            // resolve(str.data);
+            // console.log(str.data);
+            resolve(str.data);
+          }
+        });
+      });
+    },
+
+    //推荐页渲染  !!次要!!
     getData() {
       return new Promise(resolve => {
         this.$.ajax({
@@ -166,16 +193,23 @@ export default {
   },
   data() {
     return {
-      sp: [],
-      orderlist: [],
-      tuijian: []
+      cartid:[],//存取该用户购买的商品id
+      Cartlist: [],//购物车数据渲染
+      tuijian: []//用户推荐页渲染
     };
   },
   async created() {
     this.$store.commit("editLoad", true);
-    this.orderlist = await this.findorder();
-    this.tuijian = await this.getData();
-    this.tuijian,this.orderlist ? this.$store.commit("editLoad", false) : null;
+    this.Cartlist =await this.findCart();//购物车数据第一次获取guid,用户名,num.
+    
+    //遍历Cartlist[]拿到用户购买的所有商品guid赋值给cartid[].
+    for(var k = 0;k < this.Cartlist.length;k++){
+      this.cartid.push(this.Cartlist[k].guid);
+    }
+    
+    
+    this.tuijian = await this.getData();//推荐页数据获取 !!次要!!
+    this.tuijian,this.Cartlist ? this.$store.commit("editLoad", false) : null;
   }
 };
 </script> 
