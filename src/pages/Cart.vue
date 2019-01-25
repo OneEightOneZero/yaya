@@ -47,7 +47,7 @@
         <!-- ====================订单========================= -->
         <div
           class="cart-item border-top border-bottom white-bg"
-          v-for="(i,index) in orderlist"
+          v-for="(i,index) in Cartlist"
           :key="index"
         >
           <div class="product">
@@ -57,9 +57,9 @@
                   class="checkbox product-checkbox checked"
                   style="border-color: rgb(79, 185, 159); background: rgb(79, 185, 159);"
                 ></span>
-                <a href="javascript:;" class="product-img flex-child-noshrink">
+                <router-link :to="`/detail?guid=${i.guid}`" href="javascript:;" class="product-img flex-child-noshrink">
                   <img :src="i.imgurl" class="full-width full-height">
-                </a>
+                </router-link>
                 <div
                   class="product-info margin-left flex flex-col flex-justify-between flex-child-grow"
                 >
@@ -84,11 +84,11 @@
       <div class="recommend">
         <img src="https://img2.yaya.cn/newstatic/767/3174479e1a14d5.png" class="full-width">
         <ul class="flex flex-justify-between flex-wrap mt-5">
-            <!-- ================================推荐============================== -->
+          <!-- ================================推荐============================== -->
           <li class="recommend-item" v-for="(j,index) in tuijian" :key="index">
-            <a href="/product/68151.html">
+            <router-link :to="`/detail?guid=${j.guid}`" href="javascript:;">
               <img :src="j.imgurl">
-            </a>
+            </router-link>
             <p class="lines-1 mt-5 recommend-name" v-text="j.name"></p>
             <div class="flex flex-justify-between flex-align-center mt-5">
               <span class="red font-16" v-text="j.price"></span>
@@ -123,49 +123,93 @@
       </div>
       <div data-v-e91a6b2c></div>
     </div>
+    <Gloading/>
   </div>
 </template>
 <script>
+import Gloading from "../components/Gloading.vue";
+import { ServerUrl } from "../configs/ServerUrl";
+import $ from "jquery";
 export default {
   name: "news",
+  components: {
+    Gloading
+  },
+  methods: {
+
+    //通过token查找用户购买数量和用户名和商品id(guid)
+    findCart() {
+      return new Promise(function(resolve) {
+        $.ajax({
+          type: "get",
+          url: ServerUrl + "/goodlist/findCart", 
+          async: true,
+          data:{
+            token:window.localStorage.token
+          },
+          success: function(str) {
+            //成功回调
+            resolve(str.data);
+          }
+        });
+      });
+    },
+
+    //通过商品id(guid)渲染
+    getuserCart() {
+      return new Promise(function(resolve) {
+        $.ajax({
+          type: "get", //请求方式
+          url: ServerUrl + "/goodlist/guid", //接口路径
+          async: true, //异步
+          data:{
+            guid:this.cartid
+          },
+          success: function(str) {
+            //成功回调
+            // resolve(str.data);
+            // console.log(str.data);
+            resolve(str.data);
+          }
+        });
+      });
+    },
+
+    //推荐页渲染  !!次要!!
+    getData() {
+      return new Promise(resolve => {
+        this.$.ajax({
+          type: "get",
+          url: ServerUrl + "/goodlist/type",
+          data: {
+            type: "phone"
+          },
+          success(data) {
+            resolve(data.data);
+          }
+        });
+      });
+    }
+  },
   data() {
     return {
-      orderlist: [
-        {
-          imgurl:
-            "https://img2.yaya.cn/pic/product/440x440/20180711102533799.jpg",
-          name: "华为 nova 3 （PAR-AL00） 星耀版 樱草金 6GB+128GB",
-          price: "￥2599.00"
-        },
-        {
-          imgurl:
-            "https://img2.yaya.cn/pic/product/440x440/20180711102533799.jpg",
-          name: "华为 nova 3 （PAR-AL00） 星耀版 樱草金 6GB+128GB",
-          price: "￥2599.00"
-        }
-      ],
-      tuijian:[{
-          imgurl:
-            "https://img2.yaya.cn/pic/product/440x440/20180907104359718.jpg",
-          name: "锐思 10000mAh 移动电源",
-          price: "￥99.00"
-      },{
-          imgurl:
-            "https://img2.yaya.cn/pic/product/440x440/20180907104359718.jpg",
-          name: "锐思 10000mAh 移动电源",
-          price: "￥99.00"
-      },{
-          imgurl:
-            "https://img2.yaya.cn/pic/product/440x440/20180907104359718.jpg",
-          name: "锐思 10000mAh 移动电源",
-          price: "￥99.00"
-      },{
-          imgurl:
-            "https://img2.yaya.cn/pic/product/440x440/20180907104359718.jpg",
-          name: "锐思 10000mAh 移动电源",
-          price: "￥99.00"
-      }]
+      cartid:[],//存取该用户购买的商品id
+      Cartlist: [],//购物车数据渲染
+      tuijian: []//用户推荐页渲染
     };
+  },
+  async created() {
+    this.$store.commit("editLoad", true);
+    this.Cartlist =await this.findCart();//购物车数据第一次获取guid,用户名,num.
+    
+    //遍历Cartlist[]拿到用户购买的所有商品guid赋值给cartid[].
+    for(var k = 0;k < this.Cartlist.length;k++){
+      this.cartid.push(this.Cartlist[k].guid);
+    }
+    
+    
+    this.tuijian = await this.getData();//推荐页数据获取 !!次要!!
+    this.tuijian,this.Cartlist ? this.$store.commit("editLoad", false) : null;
   }
 };
 </script> 
