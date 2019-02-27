@@ -388,4 +388,8 @@ export default {
 .list-leave {
   transform: translateY(0);
 }
+.title {
+    position: static;
+
+  }
 </style>

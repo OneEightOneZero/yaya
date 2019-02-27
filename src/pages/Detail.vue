@@ -143,7 +143,7 @@
           >
             <i class="small-icon cart"></i>
             <span>购物车</span>
-            <span class="cart-number red-bg" v-text="totalNum"></span>
+            <span class="cart-number" :class="{'red-bg':totalNum>0}" v-text="totalNum"></span>
           </router-link>
           <a
             @click="showcanshu($event)"
@@ -249,7 +249,8 @@ export default {
       menu: false,
       canshu: false,
       totalNum: "",
-      shoucan: shoucan1
+      shoucan: shoucan1,
+      isLogin: false
     };
   },
   computed: {
@@ -284,6 +285,9 @@ export default {
       this.num++;
     },
     async addCart() {
+      if(!this.isLogin){
+        location.href="/#/login";
+      }
       if (this.txt == "加入购物车") {
         let data = await this.insertCart();
         if (data) {
@@ -333,11 +337,25 @@ export default {
           url: ServerUrl + "/goodlist/insertorder",
           data: {
             guid: this.guid,
-            num: this.num,
+            num: parseInt(this.num),
             token: localStorage.getItem("token")
           },
           success(data) {
             resolve(data.data);
+          }
+        });
+      });
+    },
+    autoLogin() {
+      return new Promise(resolve => {
+        this.$.ajax({
+          type: "POST",
+          data: {
+            token: localStorage.getItem("token")
+          },
+          url: ServerUrl + "/users/autoLogin",
+          success(data) {
+            resolve(data);
           }
         });
       });
@@ -346,9 +364,13 @@ export default {
   async created() {
     this.$store.commit("editLoad", true);
     this.sp = await this.getData();
-    this.totalNum = (await this.getCart()).reduce((prev, item) => {
-      return prev + parseInt(item.num);
-    }, 0);
+    let data = await this.autoLogin();
+    this.isLogin = data.status;
+    if (data.status) {
+      this.totalNum = (await this.getCart()).reduce((prev, item) => {
+        return prev + parseInt(item.num);
+      }, 0);
+    }
     this.sp ? this.$store.commit("editLoad", false) : null;
   }
 };

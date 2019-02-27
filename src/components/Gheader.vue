@@ -1,6 +1,6 @@
 <template>
   <div data-v-71e558b0>
-    <div class="home-header home-header-bg" style="height: 94px;">
+    <div class="home-header home-header-bg" style="height: 94px; width:100%;">
       <div class="header wrapper">
         <div class="search-box flex flex-align-center">
           <a href="/" class="city-sel flex flex-center flex-child-noshrink white">

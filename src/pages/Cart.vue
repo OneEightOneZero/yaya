@@ -118,8 +118,8 @@
         <div class="wrapper flex flex-justify-between flex-align-center border-top">
           <div class="flex flex-center margin-left flex-child-noshrink">
             <span
-              class="checkbox checked"
-              style="border-color: rgb(79, 185, 159); background: rgb(79, 185, 159);"
+              class="checkbox"
+              style="border-color: rgb(79, 185, 159);"
             ></span>
             <span style="margin-left: 5px;">全选</span>
           </div>
@@ -158,6 +158,7 @@ export default {
     addNum(guid, index) {
       this.cartList[index].num++;
       this.editCartNum(guid, 1);
+      location.reload();
     },
     reduceNum(guid, index) {
       this.cartList[index].num--;
@@ -166,6 +167,7 @@ export default {
       } else {
         this.editCartNum(guid, -1);
       }
+      location.reload();
     },
     check(index) {
       this.ischecked = index;
@@ -259,7 +261,7 @@ export default {
       //遍历Cartlist[]拿到用户购买的所有商品guid赋值给cartid[].
       for (let k = 0; k < this.guidList.length; k++) {
         let good = await this.getuserCart(this.guidList[k].guid);
-        this.totalNum += this.guidList[k].num;
+        this.totalNum += parseInt(this.guidList[k].num);
         this.totalMoney +=
           this.guidList[k].num * parseInt(good[0].price.slice(1));
         this.guidList[k].imgurl = good[0].imgurl;

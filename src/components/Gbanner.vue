@@ -12,7 +12,7 @@
               class="mint-swipe-item box"
               v-show="index==page"
             >
-              <a href="https://m.yaya.cn/product/73640.html?from=banner">
+              <a href="javascript:;">
                 <img :src="i.imgurl" width height class="lazy-img" loaded="true">
               </a>
             </div>
