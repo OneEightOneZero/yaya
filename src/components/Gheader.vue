@@ -3,7 +3,7 @@
     <div class="home-header home-header-bg" style="height: 94px; width:100%;">
       <div class="header wrapper">
         <div class="search-box flex flex-align-center">
-          <a href="/" class="city-sel flex flex-center flex-child-noshrink white">
+          <a href="javascript:;" class="city-sel flex flex-center flex-child-noshrink white">
             <span class="lines-1" style="max-width: 70px;">天河区</span>
             <i class="fa fa-angle-down font-16 ml-5"></i>
           </a>

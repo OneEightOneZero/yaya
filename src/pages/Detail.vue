@@ -286,7 +286,7 @@ export default {
     },
     async addCart() {
       if(!this.isLogin){
-        location.href="/#/login";
+        window.location.hash="/login";
       }
       if (this.txt == "加入购物车") {
         let data = await this.insertCart();
@@ -298,7 +298,7 @@ export default {
         }
       } else if (this.txt == "立即购买") {
         await this.insertCart();
-        location.href = "/#/app/cart";
+        location.hash = "/app/cart";
       }
     },
     getData() {

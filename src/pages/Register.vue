@@ -103,7 +103,7 @@ export default {
               }
             )
             .then(() => {
-              location.href = "/#/login";
+              location.hash = "/login";
             });
         } else {
           this.show = true;

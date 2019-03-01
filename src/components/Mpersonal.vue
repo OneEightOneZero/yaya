@@ -7,22 +7,22 @@
           <img src="//img2.yaya.cn/img/face/user.png">
         </span>
       </router-link>
-      <a href="editinfo.aspx?m=nickname">
+      <a href="javascript:;">
         <b>昵称</b>
         <i class="arrow_r"></i>
         <span>183****2698</span>
       </a>
-      <a href="editinfo.aspx?m=user">
+      <a href="javascript:;">
         <b>用户名</b>
         <i class="arrow_r"></i>
         <span>18306632698</span>
       </a>
-      <a href="editinfo.aspx?m=email">
+      <a href="javascript:;">
         <b>电子邮件</b>
         <i class="arrow_r"></i>
         <span></span>
       </a>
-      <a href="editinfo.aspx?m=mobile">
+      <a href="javascript:;">
         <b>手机号码</b>
         <i class="arrow_r"></i>
         <span>18306632698</span>
@@ -30,43 +30,43 @@
     </div>
 
     <div class="ios_menu">
-      <a href="editinfo.aspx?m=name">
+      <a href="javascript:;">
         <b>真实姓名</b>
         <i class="arrow_r"></i>
         <span></span>
       </a>
       
-      <a href="editinfo.aspx?m=sex">
+      <a href="javascript:;">
         <b>性别</b>
         <i class="arrow_r"></i>
         <span>女</span>
       </a>
       
-      <a href="editinfo.aspx?m=birthday">
+      <a href="javascript:;">
         <b>生日</b>
         <i class="arrow_r"></i>
         <span>未设置</span>
       </a>
     </div>
     <div class="ios_menu">
-      <a href="editinfo.aspx?m=password">
+      <a href="javascript:;">
         <b>密码</b>
         <i class="arrow_r"></i>
         <span>修改密码</span>
       </a>
-      <a href="/member/address">
+      <a href="javascript:;">
         <b>收货地址</b>
         <i class="arrow_r"></i>
         <span>修改收货地址</span>
       </a>
-      <a href="userPrivilege.aspx">
+      <a href="javascript:;">
         <b>我的特权</b>
         <i class="arrow_r"></i>
         <span>查看我的特权</span>
       </a>
     </div>
     <div class="ios_menu" style="margin-bottom:0;">
-      <a href="/member/face">
+      <a href="javascript:;">
         <b>人脸识别</b>
         <i class="arrow_r"></i>
       </a>

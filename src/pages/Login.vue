@@ -115,7 +115,7 @@ export default {
           .then(data => {
             if (data.data.status == "success") {
               localStorage.setItem("token", data.data.token);
-              location.href = "/";
+              location.hash = "/";
             } else {
               this.xianshi = true;
               this.details = "请输入正确密码";
